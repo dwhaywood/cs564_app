@@ -388,7 +388,7 @@ gulp.task('test:server', cb => {
         'env:all',
         'env:test',
         'mocha:unit',
-        'mocha:integration',
+        
         cb);
 });
 
