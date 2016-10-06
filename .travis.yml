@@ -1,11 +1,18 @@
 language: node_js
 node_js:
-  - 4.4.6
+- 4.4.6
 matrix:
   fast_finish: true
   allow_failures:
-    - node_js: 5.12.0
+  - node_js: 5.12.0
 before_script:
-  - npm install -g gulp-cli
-  - bower install
-services: mongodb
+- npm install -g gulp-cli
+- bower install
+services: mysql
+deploy:
+  provider: gae
+  keyfile: client-secret.json
+  project: cs564project
+before_install:
+- openssl aes-256-cbc -K $encrypted_ac979cbae0e0_key -iv $encrypted_ac979cbae0e0_iv
+  -in client-secret.json.enc -out client-secret.json -d
