@@ -4,19 +4,19 @@ node_js:
 matrix:
   fast_finish: true
   allow_failures:
-    - node_js: 5.12.0
+  - node_js: 5.12.0
 before_script:
 - npm install -g gulp-cli
-#- bower install
 services: sqlite
 deploy:
   provider: gae
   keyfile: client-secret.json
   project: cs564project
 before_install:
-  - openssl aes-256-cbc -K $encrypted_3bd1f7d0b101_key -iv $encrypted_3bd1f7d0b101_iv -in client-secret.json.enc -out client-secret.json -d
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install g++-4.8
+- openssl aes-256-cbc -K $encrypted_3bd1f7d0b101_key -iv $encrypted_3bd1f7d0b101_iv
+  -in client-secret.json.enc -out client-secret.json -d
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get -qq update
+- sudo apt-get -qq install g++-4.8
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
