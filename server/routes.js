@@ -9,6 +9,13 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/scheduled-meals', require('./api/scheduled-meal'));
+  app.use('/api/schedules', require('./api/schedule'));
+  app.use('/api/ingredients', require('./api/ingredient'));
+  app.use('/api/units', require('./api/unit'));
+  app.use('/api/nutrition-attributess', require('./api/nutrition-attributes'));
+  app.use('/api/recipes', require('./api/recipe'));
+  app.use('/api/preferences', require('./api/preferences'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 

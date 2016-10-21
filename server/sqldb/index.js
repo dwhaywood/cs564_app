@@ -14,6 +14,13 @@ var db = {
 };
 
 // Insert models below
+db.ScheduledMeal = db.sequelize.import('../api/scheduled-meal/scheduled-meal.model');
+db.Schedule = db.sequelize.import('../api/schedule/schedule.model');
+db.Ingredient = db.sequelize.import('../api/ingredient/ingredient.model');
+db.Unit = db.sequelize.import('../api/unit/unit.model');
+db.NutritionAttributes = db.sequelize.import('../api/nutrition-attributes/nutrition-attributes.model');
+db.Recipe = db.sequelize.import('../api/recipe/recipe.model');
+db.Preferences = db.sequelize.import('../api/preferences/preferences.model');
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
