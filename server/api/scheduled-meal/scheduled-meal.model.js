@@ -8,8 +8,13 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    info: DataTypes.STRING,
+    userName: DataTypes.STRING, //Link to User who scheduled this meal
+    date: DataTypes.DATEONLY, //Date that the meal is planned for
+    recipeID: DataTypes.INTEGER, //Link to recipe
+    timeOfDay: {
+        types: sequelize.ENUM,
+        values: ['breakfast','lunch','dinner']
+    }
     active: DataTypes.BOOLEAN
   });
 }
