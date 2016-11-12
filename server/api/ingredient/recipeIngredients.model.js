@@ -8,45 +8,45 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
       //This added because id is both the primary key of this table and the foreign key to recipe
-      references: {
+      /*references: {
           //Relation this links to
-          model: recipe,
+          model: Recipe,
           
           //Column name that this links to
           key: 'id',  //Should this be 'id' or '_id'?
           
           //Declares when to check the foreign key constraint. NOT SURE WHAT THIS SHOULD BE!!!
-          deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-      }
+          deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE
+      }*/
     },
     ingredientOrder: DataTypes.INTEGER,
     //ingredientID: DataTypes.INTEGER,                // This is foreign key for INGREDIENT table
-    ingredientID: {
-        type: Sequelize.INTEGER,        //Noticed in example in Sequelize documentation it defines the type within {} and uses 'Sequelize.TYPE'
+    /*ingredientID: {
+        type: sequelize.INTEGER,        //Noticed in example in Sequelize documentation it defines the type within {} and uses 'Sequelize.TYPE'
                                         //Maybe this is the same as not using {} and just saying 'DataTypes.TYPE' - do you know?
         references: {
             //Relation this links to
-            model: ingredient,
+            model: Ingredient,
             //Column name that this links to
             key: 'id',  //Should this be 'id' or '_id'?
             //Declares when to check the foreign key constraint. NOT SURE WHAT THIS SHOULD BE!!!
-            deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+            deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE
         }
-    },
+    },*/
     amount: DataTypes.INTEGER,
     //unitID: DataTypes.INTEGER,                      // This is foreign key for UNIT table
-    unitID: {
-        type: Sequelize.INTEGER,        //Noticed in example in Sequelize documentation it defines the type within {} and uses 'Sequelize.TYPE'
+   /* unitID: {
+        type: sequelize.INTEGER,        //Noticed in example in Sequelize documentation it defines the type within {} and uses 'Sequelize.TYPE'
                                         //Maybe this is the same as not using {} and just saying 'DataTypes.TYPE' - do you know?
         references: {
             //Relation this links to
-            model: unit,                //Not sure if this is actual name of UNIT table (Summer created this), adjust as needed
+            model: Unit,                //Not sure if this is actual name of UNIT table (Summer created this), adjust as needed
             //Column name that this links to
             key: 'id',  //Should this be 'id' or '_id'?
             //Declares when to check the foreign key constraint. NOT SURE WHAT THIS SHOULD BE!!!
-            deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+            deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE
         }
-    },
+    },*/
 
     originalString: DataTypes.STRING
   });

@@ -8,16 +8,16 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true,
       //This added because id is both the primary key of this table and the foreign key to recipe
-      references: {
+     /* references: {
           //Relation this links to
-          model: recipe,
+          model: Recipe,
           
           //Column name that this links to
           key: 'id',  //Should this be 'id' or '_id'?
           
           //Declares when to check the foreign key constraint. NOT SURE WHAT THIS SHOULD BE!!!
-          deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-      }
+          deferrable: sequelize.Deferrable.INITIALLY_IMMEDIATE
+      }*/
     },
     dietName: DataTypes.STRING
   });
