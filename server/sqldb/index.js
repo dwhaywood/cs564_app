@@ -4,9 +4,9 @@
 
 'use strict';
 
-import path from 'path';
-import config from '../config/environment';
-import Sequelize from 'sequelize';
+//import path from 'path';
+var config = require('../config/environment');
+var Sequelize = require('sequelize');
 
 var db = {
   Sequelize,
@@ -38,9 +38,18 @@ db.NutritionAttributes = db.sequelize.import('../api/nutrition-attributes/nutrit
 //User specific models
 
 db.Preferences = db.sequelize.import('../api/preferences/preferences.model');
-db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
+
+//Define relationships
 db.ScheduledMeal = db.sequelize.import('../api/scheduled-meal/scheduled-meal.model');
-db.Schedule = db.sequelize.import('../api/schedule/schedule.model');
+db.Recipe.belongsToMany(db.User, {through: db.ScheduledMeal});
+db.User.belongsToMany(db.Recipe, {through: db.ScheduledMeal});
+
+db.Recipe.belongsToMany(db.User, {through: db.Preferences});
+db.User.belongsToMany(db.Recipe, {through: db.Preferences});
+
+/* No longer using schedule
+db.Schedule = db.sequelize.import('../api/schedule/schedule.model'); */
+db.Thing = db.sequelize.import('../api/thing/thing.model');
 
 module.exports = db;
