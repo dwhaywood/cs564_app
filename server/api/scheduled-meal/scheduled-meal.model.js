@@ -1,3 +1,4 @@
+/*jslint node: true */
 'use strict';
 
 export default function(sequelize, DataTypes) {
@@ -14,7 +15,7 @@ export default function(sequelize, DataTypes) {
     timeOfDay: {
         types: sequelize.ENUM,
         values: ['breakfast','lunch','dinner']
-    }
+    },
     active: DataTypes.BOOLEAN
   });
 }
