@@ -20,6 +20,7 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
+import console from './components/console/console.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
@@ -43,7 +44,8 @@ angular.module('cs564WebAppApp', [
   main,
   constants,
 
-  util
+  util,
+  console
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

@@ -13,9 +13,8 @@ export default function(sequelize, DataTypes) {
     date: DataTypes.DATEONLY, //Date that the meal is planned for
     recipeID: DataTypes.INTEGER, //Link to recipe
     timeOfDay: {
-        types: sequelize.ENUM,
+        type: DataTypes.ENUM,
         values: ['breakfast','lunch','dinner']
     },
-    active: DataTypes.BOOLEAN
   });
 }

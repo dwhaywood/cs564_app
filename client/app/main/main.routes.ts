@@ -5,6 +5,8 @@ export default function routes($routeProvider) {
   $routeProvider
     .when('/', {
       template: '<main></main>'
-    });
+    }).when('/console', {
+      template: '<console></console>'
+    });;
 };
 

@@ -18,6 +18,7 @@ export default function(app) {
   app.use('/api/preferences', require('./api/preferences'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/query', require('./api/query.js'));
 
   app.use('/auth', require('./auth').default);
 
