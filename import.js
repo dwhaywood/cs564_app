@@ -171,7 +171,7 @@ function processRecipeIngredientLineUnit(data, unitArray) {
 }
 
 function importRecipeIngredients() {
-        var input = fs.createReadStream( './server/data/ingredient_unique_test.csv');
+        var input = fs.createReadStream( './server/data/ingredient_unique.csv');
         readLines(input, processSpecial);
 }
 function processSpecial(data, unitMap) {
@@ -216,7 +216,8 @@ function findOrCreateUnit(unitData){
 
 
 
-sqldb.sequelize.sync().then(() =>{
+/*sqldb.sequelize.sync()
+.then(() =>{
     //Import recipes
 importData(Recipe,{
             _id: 'RECIPE_ID',
@@ -247,8 +248,13 @@ importData(Ingredient,{
     },
    './server/data/ingredient_unique.csv');
     //Import ingredients+recipes+units
+});.then(()=>{
+importUnits(); 
 }).then(()=>{
 
-importUnits(); }).then(()=>{
-
 importRecipeIngredients();});
+
+//importRecipeIngredients();*/
+//importUnits();
+
+importRecipeIngredients();

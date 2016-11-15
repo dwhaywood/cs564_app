@@ -45,8 +45,14 @@
 /* Component styles are injected through gulp */
 /* inject:css */
 @import 'admin/admin.css';
-@import 'main/main.css';
 @import 'components/console/console.css';
+@import 'favs/favs.css';
+@import 'main/main.css';
+@import 'mylist/mylist.css';
+@import 'myplan/myplan.css';
+@import 'plan/plan.css';
+@import 'recipe/recipe.css';
+@import 'search/search.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
 @import '../components/oauth-buttons/oauth-buttons.css';

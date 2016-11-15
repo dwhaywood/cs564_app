@@ -9,6 +9,18 @@ export class NavbarComponent {
   },{
     'title': 'Console',
     'link': '/console'
+  },{
+    'title': 'Search',
+    'link': '/search'
+  },{
+    'title': 'Plan',
+    'link': '/plan'
+  },{
+    'title': 'My Plan',
+    'link': '/myplan'
+  },{
+    'title': 'My List',
+    'link': '/mylist'
   }];
   $location;
   isLoggedIn: Function;
