@@ -1,0 +1,9 @@
+INGREDIENT_ID,AISLE,NAME,AMOUNT,ORIGINAL+STRING,IMAGE,UNIT,UNIT_SHORT,UNIT_LONG,RECIPE_ID
+20081,Baking,flour,0.25,1/4 cup all-purpose flour,https://spoonacular.com/cdn/ingredients_100x100/flour.png,cup,c,cups,528053
+1021009,Cheese,extra sharp cheddar cheese,4,4 oz block extra sharp cheddar cheese  grated,https://spoonacular.com/cdn/ingredients_100x100/cheddar-cheese.jpg,oz,oz,ounces,528053
+1082047,Spices and Seasonings,kosher salt,2,Kosher salt,https://spoonacular.com/cdn/ingredients_100x100/salt.jpg,servings,servings,servings,528053
+1077,Milk; Eggs; Other Dairy,milk,2,2 to 2 1/2 Tablespoons milk  plus more for brushing,https://spoonacular.com/cdn/ingredients_100x100/milk.jpg,Tablespoons,Tablespoons,Tablespoons,528053
+2026,Spices and Seasonings,onion powder,0.125,1/8 teaspoon onion powder,https://spoonacular.com/cdn/ingredients_100x100/onion-powder.jpg,teaspoon,t,teaspoons,528053
+2047,Spices and Seasonings,salt,0.25,1/4 teaspoon salt,https://spoonacular.com/cdn/ingredients_100x100/salt.jpg,teaspoon,t,teaspoons,528053
+1145,Milk; Eggs; Other Dairy,unsalted butter,2,2 Tablespoons unsalted butter,https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg,Tablespoons,Tablespoons,Tablespoons,528053
+93824,Baking,white whole wheat flour,0.5,1/2 cup white whole wheat flour,https://spoonacular.com/cdn/ingredients_100x100/flour.png,cup,c,cups,528053

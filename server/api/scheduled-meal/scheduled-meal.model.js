@@ -10,7 +10,7 @@ export default function(sequelize, DataTypes) {
     },
     userName: DataTypes.STRING, //Link to User who scheduled this meal
     date: DataTypes.DATEONLY, //Date that the meal is planned for
-    recipeID: DataTypes.INTEGER, //Link to recipe
+    //recipeID: DataTypes.INTEGER, //Link to recipe
     timeOfDay: {
         type: DataTypes.ENUM,
         values: ['breakfast','lunch','dinner']

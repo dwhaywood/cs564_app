@@ -7,10 +7,12 @@ module.exports = {
 
   // Sequelize connection opions
   sequelize: {
-    uri: 'sqlite://',
+    //uri: 'sqlite://',
+    uri: 'postgres://postgres:admin@localhost:5432/eatbetterdb',
     options: {
+      
       logging: false,
-      storage: 'dev.sqlite',
+      //storage: 'dev.sqlite',
       define: {
         timestamps: false
       }
