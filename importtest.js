@@ -4,19 +4,32 @@ var sqldb = require('./server/sqldb');
 var Ingredient = sqldb.Ingredient;
 var Unit = sqldb.Unit;
 var Recipe = sqldb.Recipe;
-var RecipeDiet = sqldb.RecipeDiet;
-var RecipeCuisine = sqldb.RecipeCuisine;
 var RecipeIngredients = sqldb.RecipeIngredients;
-var NutritionAttributes = sqldb.NutritionAttributes;
 
 
-var error_log = fs.createWriteStream('importerrors.txt');
-//Read lines from file
+var unitMap ={};
+
+
+Unit.findAll().then((unitArray) =>{
+            //console.log(unitArray);
+    
+            unitMap = unitArray.reduce((o,v) => {
+                var uniquekey = v.name+v.shortName+v.longName;
+                o[uniquekey] = v.get();
+                return o;
+            });
+            console.log(unitMap);
+            /* var unitMap = Object.keys(uni).reduce(function(o, cur){
+                o[cur] = data[idMap[cur]];
+                return o;
+            },{});*/
+        });
+console.log(unitMap);
+
 function readLines(input, func, model, idMap) {
     var remaining = '';
     var lineNum = 0;
     var columnNames = [];
-    var outarray = [];
     
   function mapArray(o,v,i){
               o[columnNames[i]] = v;
@@ -28,7 +41,6 @@ function readLines(input, func, model, idMap) {
     var index = remaining.indexOf('\n');
     var last  = 0;
     var lineAry = [];
-    //var working = true;
     //var lineObj = {}; //Map of columnnames to Line array
     
     while (index > -1) {
@@ -55,39 +67,24 @@ function readLines(input, func, model, idMap) {
     if (remaining.length > 0) {
       func(remaining, model, idMap);
     }
-/*  
-    input.on('close', function() {
-        working = false;
-        
-    });  
-    */
   });
 }
 
 function process(data, model, idMap) {
-    //var result;
+    var result;
     var outresult;
     //console.log(data);
     var updateData = Object.keys(idMap).reduce(function(o, cur){
-        
-        if (data[idMap[cur]]){
-            o[cur] = data[idMap[cur]];
-        }
-
+        o[cur] = data[idMap[cur]];
         return o;
     },{});
     
-    if (updateData._id || updateData.name || updateData.IngredientId || updateData.RecipeId ){ //Make sure it has a primary key
-        model.upsert(updateData).then(update =>{
-            console.log(updateData);
-            outresult = update ? "CREATE" : "UPDATE";
-            console.log(outresult);
-        //console.log(data);
-        }).catch(function (e){
-            error_log.write(e);
-                 });
-    }
-
+    result = model.upsert(updateData).then(update =>{
+    console.log(updateData);
+    outresult = update ? "CREATE" : "UPDATE";
+    console.log(outresult);
+    //console.log(data);
+    });
 
 }
 
@@ -100,16 +97,6 @@ function importData(model,idMap,fileName) {
     });*/
 }
 
-
-//Recipe Ingredient Unit Functions
-function importUnits() {
-    
-        var input = fs.createReadStream( './server/data/ingredient_unique.csv');
-        var unitArray = {};
-        processRecipeIngredientUnit(input, processRecipeIngredientLineUnit, unitArray);
-
-
-}
 
 function processRecipeIngredientUnit(input, func, unitArray) {
     //console.log('processRecipeIngredientUnit');
@@ -163,37 +150,31 @@ function processRecipeIngredientUnit(input, func, unitArray) {
   });
 }
 
-function processRecipeIngredientLineUnit(data, unitArray) {
-    console.log('processRecipeIngredientLineUnit');
-    console.log('Process data: ');
-    console.log(data);
-    //console.log(data);
-    var unitData = {
-        name: data.UNIT,
-        shortName: data.UNIT_SHORT,
-        longName: data.UNIT_LONG,
-    };
-    
-    var unique = Object.keys(unitData).reduce(function(out,val){
-        out = out+unitData[val]; 
-        return out;
-    },'');
-    
-    unitArray[unique] = unitData;
-    
-    
-    //var updateData ={};
-    //var unitid;
-    
-
-}
 
 function importRecipeIngredients() {
-        var input = fs.createReadStream( './server/data/ingredient_unique.csv');
-        readLines(input, processSpecial);
-}
+        var unitPromises =[];
+        //var unitMap = {};
+        var recipeIngredientMap ={};
 
-function processSpecial(data, unitMap) {
+        Unit.findAll().then((unitArray) =>{
+            console.log(unitArray);
+/*            var unitMap = Object.keys(uni).reduce(function(o, cur){
+                o[cur] = data[idMap[cur]];
+                return o;
+            },{});*/
+        });
+/*        var input = fs.createReadStream( './server/data/ingredient_unique.csv');
+        readLines(input, processUnit);
+        unitPromises.all(()=>{
+            RecipeIngredients.upsert(updateData, {logging:console.log}).then(update =>{
+                console.log(updateData);
+                outresult = update ? "CREATE" : "UPDATE";
+                console.log(outresult);
+                //console.log(data);
+            });
+        });*/
+}
+function processUnit(data, unitMap, unitPromises) {
     console.log('Process data: ');
     console.log(data);
     var outresult;
@@ -217,72 +198,50 @@ function processSpecial(data, unitMap) {
                 UnitId: unit.get('_id')
             };
     }).then(function(){
-        RecipeIngredients.upsert(updateData, {logging:console.log}).then(update =>{
-                console.log(updateData);
-                outresult = update ? "CREATE" : "UPDATE";
-                console.log(outresult);
-                //console.log(data);
-            });
+        
     });
 
 }
 
-function findOrCreateUnit(unitData){
-    return Unit.findOrCreate({where: unitData});
-}
-
-sqldb.sequelize.sync({force:true})
+/*sqldb.sequelize.sync()
 .then(() =>{
     //Import recipes
-    importData(Recipe,{
-                _id: 'RECIPE_ID',
-        recipeName: 'TITLE',
-        readyInMinutes: 'READY_IN_MINUTES',
-        servings: 'SERVINGS',
-        imageAddress: 'IMAGE',
-        sourceURL: 'SOURCE_URL',
-        sourceName: 'SOURCE_NAME',
-        veryPopular: 'VERY_POPULAR'
-        },
-       './server/data/recipe_unique.csv');
+importData(Recipe,{
+            _id: 'RECIPE_ID',
+    recipeName: 'TITLE',
+    readyInMinutes: 'READY_IN_MINUTES',
+    servings: 'SERVINGS',
+    imageAddress: 'IMAGE',
+    sourceURL: 'SOURCE_URL',
+    sourceName: 'SOURCE_NAME',
+    veryPopular: 'VERY_POPULAR'
+    },
+   './server/data/recipe_unique.csv');
 
 }).then(()=>{
         //Import Recipe Cuisines
-    importData(RecipeCuisine,{
-        RecipeId: 'RECIPE_ID',
-        cuisineName: 'CUISINE_TYPE'
-        },
-       './server/data/cuisineRecipe_unique.csv');
+importData(RecipeCuisine,{
+    RecipeId: 'RECIPE_ID',
+    cuisineName: 'CUISINE_TYPE'
+    },
+   './server/data/cuisineRecipe_unique.csv');
 }).then(()=>{
 //Import ingredients
-    importData(Ingredient,{
-        _id:'INGREDIENT_ID',
-        aisle:'AISLE',
-        ingredientName:'NAME',
-        image:'IMAGE'
-        },
-       './server/data/ingredient_unique.csv');
+importData(Ingredient,{
+    _id:'INGREDIENT_ID',
+    aisle:'AISLE',
+    ingredientName:'NAME',
+    image:'IMAGE'
+    },
+   './server/data/ingredient_unique.csv');
     //Import ingredients+recipes+units
+});.then(()=>{
+importUnits(); 
 }).then(()=>{
-    importData(Unit,{
-        name:'UNIT',
-        shortName:'UNIT_SHORT',
-        longName:'UNIT_LONG',
-        },
-       './server/data/ingredient_unique.csv'); 
-}).then(()=>{
-    importData(RecipeIngredients,{
-        IngredientId:'INGREDIENT_ID',
-        RecipeId:'RECIPE_ID',
-        UnitName:'UNIT',
-        amount:'AMOUNT',
-        originalString:'ORIGINAL+STRING'
-        },
-       './server/data/ingredient_unique.csv'); 
-});
 
+importRecipeIngredients();});
 
-//importRecipeIngredients();
+//importRecipeIngredients();*/
 //importUnits();
 
 //importRecipeIngredients();
