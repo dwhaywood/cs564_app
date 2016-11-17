@@ -3,7 +3,7 @@
         <h1>Query</h1>
         
         <div class="col-md-8">
-            <textarea class="form-control" rows="3">{{$ctrl.queryString}}</textarea>
+            <textarea ng-model="$ctrl.queryString" class="form-control" rows="3"></textarea>
         <button ng-click="$ctrl.runQuery()">Submit</button>
         </div>
         
