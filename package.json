@@ -150,8 +150,7 @@
     "test": "gulp test",
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
     "start": "node server",
-    "build": "gulp",
-    "postinstall": "gulp serve:dist"
+    "build": "gulp"
   },
   "private": true
 }
