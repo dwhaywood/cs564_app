@@ -44,7 +44,7 @@ Thing.sync()
   });
 
 User.sync()
-  .then(() => User.destroy({ where: {} }))
+  .then(() => User.destroy({ where: {$or :[{name: 'Test User'},{name: 'Admin'}]} }))
   .then(() => {
     User.bulkCreate([{
       provider: 'local',

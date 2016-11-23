@@ -20,9 +20,16 @@ import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
-import console from './components/console/console.component';
+import console from './console/console.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import favs from './favs/favs.component';
+import mylist from './mylist/mylist.component';
+import myplan from './myplan/myplan.component';
+import plan from './plan/plan.component';
+import recipe from './recipe/recipe.component';
+import search from './search/search.component';
+//import search from './search/search.component';
 
 
 
@@ -45,7 +52,13 @@ angular.module('cs564WebAppApp', [
   constants,
 
   util,
-  console
+  console,
+    favs,
+    mylist,
+    myplan,
+    plan,
+    recipe,
+    search
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

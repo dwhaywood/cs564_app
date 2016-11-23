@@ -1,0 +1,13 @@
+/*table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}*/
+
+* { 
+  word-wrap:break-all;
+}
+
+table { 
+  table-layout:fixed;
+  width:100%;
+}
