@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 import routes from './recipe.routes';
 
 export class RecipeComponent {
+    message;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

@@ -5,7 +5,7 @@ const ngRoute = require('angular-route');
 
 import routes from './console.routes';
 
-export class consoleComponent {
+export class ConsoleComponent {
     $http;
     queryString;
     queryResponse;

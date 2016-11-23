@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 import routes from './search.routes';
 
 export class SearchComponent {
+    message;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

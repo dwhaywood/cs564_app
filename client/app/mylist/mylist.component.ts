@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 import routes from './mylist.routes';
 
 export class MylistComponent {
+    message;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

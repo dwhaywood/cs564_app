@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 import routes from './myplan.routes';
 
 export class MyplanComponent {
+    message;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

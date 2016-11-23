@@ -6,6 +6,7 @@ const ngRoute = require('angular-route');
 import routes from './favs.routes';
 
 export class FavsComponent {
+    message;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';

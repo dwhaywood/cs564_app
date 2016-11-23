@@ -151,7 +151,7 @@
     "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update",
     "start": "node server",
     "build": "gulp",
-    "postinstall": "gulp build && gulp serve:dist"
+    "postinstall": "gulp serve:dist"
   },
   "private": true
 }

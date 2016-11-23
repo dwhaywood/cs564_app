@@ -46,6 +46,7 @@
 /* inject:css */
 @import 'admin/admin.css';
 @import 'components/console/console.css';
+@import 'console/console.css';
 @import 'favs/favs.css';
 @import 'main/main.css';
 @import 'mylist/mylist.css';
