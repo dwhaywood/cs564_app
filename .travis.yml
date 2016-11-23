@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - 4.6.0
-services: sqlite
+services: 
+  - sqlite
 matrix:
   fast_finish: true
   allow_failures:
@@ -9,10 +10,6 @@ matrix:
 after_success:
   - ./scripts/deploy.sh
 before_install:
-  - openssl aes-256-cbc -K $encrypted_3bd1f7d0b101_key -iv $encrypted_3bd1f7d0b101_iv
-  -in client-secret.json.enc -out client-secret.json -d
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install g++-4.8
+  - npm install -g sqlite3
 env:
   - CXX=g++-4.8
