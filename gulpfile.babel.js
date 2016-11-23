@@ -575,7 +575,7 @@ grunt.initConfig({
         },
         heroku: {
             options: {
-                remote: 'heroku',
+                remote: 'https://git.heroku.com/eatbetter3-dev.git',
                 branch: 'master'
             }
         },
