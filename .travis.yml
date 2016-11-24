@@ -1,27 +1,28 @@
 language: node_js
 sudo: required
 node_js:
-  - 4.6.0
-sudo: required
-services: 
-  - sqlite3
+- 4.6.0
+services:
+- sqlite3
 matrix:
   fast_finish: true
   allow_failures:
   - node_js: 5.12.0
 after_success:
-  - git config --global user.name "Travis CI"
-  - git config --global user.email "dhaywood@wisc.edu"
-  - ssh-keyscan -t rsa heroku.com >> ~/.ssh/known_hosts 2>/dev/null
-  - gem install heroku
-  - echo yes | heroku keys:add
-  - gulp build
-  - gulp buildcontrol:heroku
-  - heroku keys:remove "$(< ~/.ssh/id_rsa.pub)"
+- git config --global user.name "Travis CI"
+- git config --global user.email "dhaywood@wisc.edu"
+- ssh-keyscan -t rsa heroku.com >> ~/.ssh/known_hosts 2>/dev/null
+- gem install heroku
+- echo yes | heroku keys:add
+- gulp build
+- gulp buildcontrol:heroku
+- heroku keys:remove "$(< ~/.ssh/id_rsa.pub)"
 before_install:
-  - npm install -g sqlite3
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install g++-4.8
+- openssl aes-256-cbc -K $encrypted_3bd1f7d0b101_key -iv $encrypted_3bd1f7d0b101_iv
+  -in .netrc.enc -out ~\/.netrc -d
+- npm install -g sqlite3
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get -qq update
+- sudo apt-get -qq install g++-4.8
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8
