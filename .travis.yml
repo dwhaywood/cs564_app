@@ -15,8 +15,8 @@ after_success:
   - ssh-keyscan -t rsa heroku.com >> ~/.ssh/known_hosts 2>/dev/null
   - gem install heroku
   - echo yes | heroku keys:add
-  - grunt build
-  - grunt buildcontrol:heroku
+  - gulp build
+  - gulp buildcontrol:heroku
   - heroku keys:remove "$(< ~/.ssh/id_rsa.pub)"
 before_install:
   - npm install -g sqlite3
