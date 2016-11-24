@@ -2,7 +2,7 @@
 
 describe('Component: RecipeDetailView', function() {
   // load the component's module
-  beforeEach(module('cs564WebAppApp.RecipeDetailView'));
+  beforeEach(angular.mock.module('cs564WebAppApp.RecipeDetailView'));
 
   var RecipeDetailViewComponent;
 

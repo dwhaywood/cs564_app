@@ -2,7 +2,7 @@
 
 describe('Component: ConsoleComponent', function() {
   // load the controller's module
-  beforeEach(module('cs564WebAppApp.console'));
+  beforeEach(angular.mock.module('cs564WebAppApp.console'));
 
   var ConsoleComponent;
 

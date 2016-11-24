@@ -2,7 +2,7 @@
 
 describe('Component: ShoppingListView', function() {
   // load the component's module
-  beforeEach(module('cs564WebAppApp.ShoppingListView'));
+  beforeEach(angular.mock.module('cs564WebAppApp.ShoppingListView'));
 
   var ShoppingListViewComponent;
 

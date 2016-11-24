@@ -2,7 +2,7 @@
 
 describe('Component: RecipeListView', function() {
   // load the component's module
-  beforeEach(module('cs564WebAppApp.RecipeListView'));
+  beforeEach(agnular.mock.module('cs564WebAppApp.RecipeListView'));
 
   var RecipeListViewComponent;
 

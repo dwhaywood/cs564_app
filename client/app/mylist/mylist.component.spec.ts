@@ -2,7 +2,7 @@
 
 describe('Component: MylistComponent', function() {
   // load the controller's module
-  beforeEach(module('cs564WebAppApp.mylist'));
+  beforeEach(angular.mock.module('cs564WebAppApp.mylist'));
 
   var MylistComponent;
 

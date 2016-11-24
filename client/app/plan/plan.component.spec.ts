@@ -2,7 +2,7 @@
 
 describe('Component: PlanComponent', function() {
   // load the controller's module
-  beforeEach(module('cs564WebAppApp.plan'));
+  beforeEach(angular.mock.module('cs564WebAppApp.plan'));
 
   var PlanComponent;
 

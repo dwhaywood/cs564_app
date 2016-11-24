@@ -2,7 +2,7 @@
 
 describe('Component: FavsComponent', function() {
   // load the controller's module
-  beforeEach(module('cs564WebAppApp.favs'));
+  beforeEach(angular.mock.module('cs564WebAppApp.favs'));
 
   var FavsComponent;
 

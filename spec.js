@@ -3,7 +3,7 @@
 var testsContext;
 
 require('babel-polyfill');
-require('angular');
+var angular = require('angular');
 require('angular-mocks');
 
 

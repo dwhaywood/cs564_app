@@ -2,7 +2,7 @@
 
 describe('Component: SearchComponent', function() {
   // load the controller's module
-  beforeEach(module('cs564WebAppApp.search'));
+  beforeEach(angular.mock.module('cs564WebAppApp.search'));
 
   var SearchComponent;
 

@@ -2,7 +2,7 @@
 
 describe('Component: ScheduleView', function() {
   // load the component's module
-  beforeEach(module('cs564WebAppApp.ScheduleView'));
+  beforeEach(angular.mock.module('cs564WebAppApp.ScheduleView'));
 
   var ScheduleViewComponent;
 
