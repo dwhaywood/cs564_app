@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+echo Deploying to heroku
 info() { echo "$0: $1"; }
 error() { info "$1"; exit 1; }
 
