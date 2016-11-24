@@ -19,7 +19,7 @@ after_success:
 - heroku keys:remove "$(< ~/.ssh/id_rsa.pub)"
 before_install:
 - openssl aes-256-cbc -K $encrypted_3bd1f7d0b101_key -iv $encrypted_3bd1f7d0b101_iv
-  -in .netrc.enc -out ~\/.netrc -d
+  -in .netrc.enc -out ~/.netrc -d
 - npm install -g sqlite3
 - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 - sudo apt-get -qq update
