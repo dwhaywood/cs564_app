@@ -34,7 +34,9 @@ form {
     color: #2196F3;
 }
 
-
+.title {
+  display: inline-block;
+}
 footer {
     margin: 50px 0;
 }

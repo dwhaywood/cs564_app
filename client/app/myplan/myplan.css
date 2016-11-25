@@ -39,36 +39,12 @@ footer {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
     }
 
-    .ingredient-list-item, .nutrition-list-item {
+
+    .date-picker {
       display: inline-block;
-      width: 100%;
-      margin: 15px;
-    }
-
-    .ingredient-amount {
-        width: 33%;
-    }
-
-    .ingredient-name {
-         width: 33%;
-    }
-
-    .ingredient-list, .nutrition-list {
-      display: block;
-      margin-left: 60px;
-      margin-right: 60px;
-    }
-
-    .ingredient-image {
-       height: 105px;
-       width: 33%;
-       vertical-align: middle;
-       text-align: center;
-       line-height: 100px;
-       background-color: #ffffff;
-       position: relative;
 
     }
+
     .row {
       margin-right: 36px;
       margin-left: 36px;
