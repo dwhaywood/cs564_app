@@ -6,6 +6,12 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.navbar {
+    background: #F4511E;
 }
 
 .navbar-fixed-top .nav {
@@ -14,6 +20,14 @@ body {
 
 .navbar-fixed-top .navbar-brand {
     padding: 0 15px;
+}
+
+h2 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+p {
+  color: grey;
 }
 
 footer {
@@ -25,7 +39,85 @@ footer {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
     }
 
+    .ingredient-list-item, .nutrition-list-item {
+      display: inline-block;
+      width: 100%;
+      margin: 15px;
+    }
+
+    .ingredient-amount {
+        width: 33%;
+    }
+
+    .ingredient-name {
+         width: 33%;
+    }
+
+    .ingredient-list, .nutrition-list {
+      display: block;
+      margin-left: 60px;
+      margin-right: 60px;
+    }
+
+    .ingredient-image {
+       height: 105px;
+       width: 33%;
+       vertical-align: middle;
+       text-align: center;
+       line-height: 100px;
+       background-color: #ffffff;
+       position: relative;
+
+    }
+    .row {
+      margin-right: 36px;
+      margin-left: 36px;
+
+    }
     .navbar-fixed-top .navbar-brand {
         padding: 15px 0;
     }
+
+    form {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .navbar-inverse .navbar-brand {
+        color: #FFFFFF;
+    }
+
+    .navbar {
+        background: #F4511E;
+    }
+
+    .navbar-inverse .navbar-nav>li>a {
+        color: #FFFFFF;
+    }
+
+    .recipe-item {
+        margin-bottom: 25px;
+    }
+
+    .page-header, a {
+        color: #2196F3;
+    }
+
+    h1, h2, h3, h4 {
+      color: #2196F3;
+    }
+
+
+    footer {
+        margin: 50px 0;
+    }
+
+    small {
+        color: #FF5722;
+    }
+
+    form {
+      align: center;
+    }
+
 }
