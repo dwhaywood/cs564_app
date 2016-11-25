@@ -19,7 +19,7 @@ form {
 }
 
 .navbar {
-    background: #FF5722;
+    background: #F4511E;
 }
 
 .navbar-inverse .navbar-nav>li>a {
@@ -42,3 +42,8 @@ footer {
 small {
     color: #FF5722;
 }
+
+form {
+  align: center;
+}
+
