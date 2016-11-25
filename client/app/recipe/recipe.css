@@ -6,6 +6,8 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .navbar {
@@ -20,6 +22,14 @@ body {
     padding: 0 15px;
 }
 
+h2 {
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+p {
+  color: grey;
+}
+
 footer {
     padding: 30px 0;
 }
@@ -29,7 +39,7 @@ footer {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
     }
 
-    .ingredient-list-item {
+    .ingredient-list-item, .nutrition-list-item {
       display: inline-block;
       width: 100%;
       margin: 15px;
@@ -43,10 +53,10 @@ footer {
          width: 33%;
     }
 
-    .ingredient-list {
+    .ingredient-list, .nutrition-list {
       display: block;
-      margin-left: 42px;
-      margin-right: 42px;
+      margin-left: 60px;
+      margin-right: 60px;
     }
 
     .ingredient-image {
