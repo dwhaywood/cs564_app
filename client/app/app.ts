@@ -8,7 +8,7 @@ const ngSanitize = require('angular-sanitize');
 const ngRoute = require('angular-route');
 
 const uiBootstrap = require('angular-ui-bootstrap');
-// const ngMessages = require('angular-messages');
+//const ngMessages = require('angular-messages');
 // import ngValidationMatch from 'angular-validation-match';
 
 
@@ -58,7 +58,8 @@ angular.module('cs564WebAppApp', [
     myplan,
     plan,
     recipe,
-    search
+    search,
+    //ngMessages
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
