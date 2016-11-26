@@ -1,12 +1,22 @@
 <div class="container">
     <div class="row">
+        <form>
+        
         <h1>Query</h1>
         
         <div class="col-md-8">
+        <label >Query URL</label>
+            <input type="text" ng-model="consoleCtrl.queryUrl" placeholder="Query/<SQL File>"><br/>
+        <label>Query String</label>
             <textarea ng-model="consoleCtrl.queryString" class="form-control" rows="3"></textarea>
         <button ng-click="consoleCtrl.runQuery()">Submit</button>
         </div>
-        
+        <div class="col-md-4">
+            <label>Query Params</label><button ng-click="consoleCtrl.addnewParam()">Add param</button><br/>
+            <querytestparam ng-repeat="param in consoleCtrl.queryParams" prop="param">Param</querytestparam>
+            
+        </div>
+        </form>
     </div>
     <br>
     <div class="row">

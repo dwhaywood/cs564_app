@@ -1,2 +1,2 @@
-select name
-from Users
+select *
+from Recipes Limit 5;
