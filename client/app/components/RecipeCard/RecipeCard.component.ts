@@ -10,9 +10,9 @@ export class RecipeCardComponent {
     
   /*@ngInject*/
   constructor() {
-    this.title = 'Recipe Title';
-    this.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.';
-    this.image = 'http://placehold.it/700x400';
+    this.title = this.title || 'No Title';
+    this.description = this.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.';
+    this.image = this.image || 'http://placehold.it/700x400';
   }
 }
 
@@ -27,12 +27,12 @@ export default angular.module('yes', [])
             <h3>\
               <a href="#">{{ $ctrl.title }}</a> \
             </h3> \
-            <likebutton></likebutton>\
+            <likebutton recipeid="$ctrl.recipeid"></likebutton>\
         </div> \
             <p>{{$ctrl.description}}</p> \
         </div> \
         ',
-    bindings: { recipeId: '<' },
+    bindings: { recipeid: '<', title: '<' },
     controller: RecipeCardComponent
   })
   .name;

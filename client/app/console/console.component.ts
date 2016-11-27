@@ -18,11 +18,12 @@ export class ConsoleComponent {
 
     /*@ngInject*/
     constructor($http) {
-        this.queryString='Select * from Recipes limit 100';
+        this.queryString='Select * from :table limit 100';
         this.$http = $http;
         this.queryColumns=[];
         this.queryResponse=[];
-        this.queryParams = [{'key':'value'}];
+        this.queryParams = [{key:'table',
+                            value: '?'}];
         this.replacements= {};
         this.ctrl = this;
     }
@@ -48,7 +49,7 @@ export class ConsoleComponent {
     
     getParams() {
         this.queryParams.forEach(function(param,index) {
-            (<any>Object).assign(this.replacements,param);
+            this.replacements[param.key]=param.value
         },this);
     }
     
@@ -58,7 +59,7 @@ export class ConsoleComponent {
     }
     
     addnewParam(){
-        this.queryParams.push({});
+        this.queryParams.push({key:'',value:''});
         console.log(this.queryParams);
     }
     

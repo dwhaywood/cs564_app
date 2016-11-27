@@ -78,6 +78,15 @@ angular.module('cs564WebAppApp', [
     });
   });
 
+//We already have a limitTo filter built-in to angular,
+//let's make a startFrom filter
+angular.module('cs564WebAppApp').filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
+
 angular
   .element(document)
   .ready(() => {
@@ -85,3 +94,5 @@ angular
       strictDi: true
     });
   });
+
+

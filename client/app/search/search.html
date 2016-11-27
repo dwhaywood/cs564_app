@@ -29,114 +29,12 @@
     <!-- /.row -->
 
     <!-- Projects Row -->
-    <div class="row" ng-repat="recipe in searchCtrl.results">
-        <recipecard recipeid="recipe._id"></recipecard>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+    <div class="row" >
+        <div ng-repeat="recipe in searchCtrl.results | startFrom:(searchCtrl.currentPage -1)*searchCtrl.itemsPerPage | limitTo:searchCtrl.itemsPerPage">
+            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+            <recipecard recipeid="recipe._id" title="recipe.title"></recipecard>
         </div>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <!-- /.row -->
 
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-
-        </div>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-
-    <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
     </div>
     <!-- /.row -->
 
@@ -145,28 +43,7 @@
     <!-- Pagination -->
     <div class="row text-center">
         <div class="col-lg-12">
-            <ul class="pagination">
-                <li>
-                    <a href="#">&laquo;</a>
-                </li>
-                <li class="active">
-                    <a href="#">1</a>
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-                <li>
-                    <a href="#">4</a>
-                </li>
-                <li>
-                    <a href="#">5</a>
-                </li>
-                <li>
-                    <a href="#">&raquo;</a>
-                </li>
+            <ul uib-pagination total-items="searchCtrl.totalItems" items-per-page="searchCtrl.itemsPerPage" ng-model="searchCtrl.currentPage">
             </ul>
         </div>
     </div>

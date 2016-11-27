@@ -12,9 +12,11 @@ export class SearchComponent {
     currentPage;
     totalItems;
     searchTerm;
+    itemsPerPage;
   /*@ngInject*/
   constructor() {
     this.message = 'Hello';
+    this.results=[];
     for (var i=0; i <100; i++){ //Generate 100 fake recipes for testing
         this.results.push({
             _id:i,
@@ -23,6 +25,7 @@ export class SearchComponent {
     }
     this.currentPage = 1;
     this.totalItems = this.results.length;
+    this.itemsPerPage = 9;
    }
     $onInit() {
         //

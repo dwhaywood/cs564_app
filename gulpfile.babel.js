@@ -288,6 +288,12 @@ gulp.task('jscs', () => {
 
 gulp.task('clean:tmp', () => del(['.tmp/**/*'], {dot: true}));
 
+gulp.task('copydb', () => {
+        return [del('dev.sqlite'),gulp.src(
+        `./cleandb/dev.sqlite`)
+        .pipe(gulp.dest('./',{overwrite: true}))];
+});
+
 gulp.task('start:client', cb => {
     whenServerReady(() => {
         open('http://localhost:' + config.browserSyncPort);
@@ -339,6 +345,7 @@ gulp.task('serve', cb => {
     runSequence(
         [
             'clean:tmp',
+            'copydb',
             'lint:scripts',
             'inject',
             'copy:fonts:dev',
