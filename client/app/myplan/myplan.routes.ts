@@ -4,6 +4,7 @@ export default function($routeProvider) {
   'ngInject';
   $routeProvider
     .when('/myplan', {
-      template: '<myplan></myplan>'
+      template: '<myplan></myplan>',
+      authenticate: 'user'
     });
 }

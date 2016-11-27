@@ -7,6 +7,9 @@
     <title>Eatbetter</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link rel="icon" 
+      type="image/png" 
+      src="assets/images/favicon.png">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 </head>
 <body>
@@ -21,12 +24,18 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-      ga('create', 'UA-XXXXX-X');
+      ga('create', 'UA-45087252-2', 'auto');
       ga('send', 'pageview');
+
     </script>
 
     <navbar></navbar>
     <div ng-view=""></div>
     <footer></footer>
+    <!-- jQuery -->
+    <script src="assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>
