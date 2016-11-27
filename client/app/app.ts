@@ -29,6 +29,8 @@ import myplan from './myplan/myplan.component';
 import plan from './plan/plan.component';
 import recipe from './recipe/recipe.component';
 import search from './search/search.component';
+import recipecard from './components/RecipeCard/RecipeCard.component';
+import likebutton from './components/LikeButton/LikeButton.component';
 //import search from './search/search.component';
 
 
@@ -59,6 +61,8 @@ angular.module('cs564WebAppApp', [
     plan,
     recipe,
     search,
+    recipecard,
+    likebutton
     //ngMessages
 ])
   .config(routeConfig)

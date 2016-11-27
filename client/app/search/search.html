@@ -18,7 +18,7 @@
   <div class="row">
     <form>
       <div class="form-group col-sm-10">
-        <input type="search" class="form-control input-lg" id="search" placeholder="Search for a recipe">
+        <input type="search" class="form-control input-lg" id="search" placeholder="Search for a recipe" ng-model="searchCtrl.searchTerm">
       </div>
 
       <div class="col-sm-2">
@@ -29,19 +29,8 @@
     <!-- /.row -->
 
     <!-- Projects Row -->
-    <div class="row">
-        <div class="col-md-4 recipe-item">
-            <a href="#">
-                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-            </a>
-          <div class="title">
-            <h3>
-              <a href="#">Recipe Title</a>
-            </h3>
-            <button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-heart"></span></button>
-          </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
+    <div class="row" ng-repat="recipe in searchCtrl.results">
+        <recipecard recipeid="recipe._id"></recipecard>
         <div class="col-md-4 recipe-item">
             <a href="#">
                 <img class="img-responsive" src="http://placehold.it/700x400" alt="">
