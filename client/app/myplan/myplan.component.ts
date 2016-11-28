@@ -17,9 +17,10 @@ export class MyplanComponent {
     ScheduledMeal;
     loaded;
     meals;
+    $watchGroup;
     
     /*@ngInject*/
-    constructor($location,Auth,ScheduledMeal) {
+    constructor($location,Auth,ScheduledMeal,$watchGroup) {
         this.locationParams = $location.search();
         this.Auth = Auth
         this.currDate = new Date;
@@ -31,6 +32,7 @@ export class MyplanComponent {
             dinner: []
         }
         this.meals = ['breakfast','lunch','dinner']; //Can add others if needed
+        this.$watchGroup = $watchGroup;
     }
     //Retrieve scheduled meals for the user from server
     getScheduledMeals =  () => {
@@ -47,12 +49,13 @@ export class MyplanComponent {
             this.loaded = true;
         })
         this.buildViewData();
+        this.$watchGroup(['startDate','endDate'],this.validateDates);
     }
 
     //Build the object based on the input paramters that will be rendered by the template
     buildViewData = () => {
         let daynames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        for(var day = this.startDate; day <= this.endDate; day.setDate(day.getDate()+1)){
+        for(var day = new Date(this.startDate); day <= this.endDate; day.setDate(day.getDate()+1)){
             this.viewScheduleData['days'].push({date:day, dayname:daynames[day.getDay()],disp:moment(day).format('ddd MMM Do')})
             for (let meal of this.meals){
                 this.viewScheduleData[meal].push({planned:false});
@@ -66,6 +69,10 @@ export class MyplanComponent {
     //meal: ['breakfast','lunch','dinner']
     findScheduledRecipe = function(date,meal){
         
+    }
+    
+    validateDates = (newvalue,oldvalue,scope) => {
+        console.log('New value:'+newvalue);
     }
 }
 

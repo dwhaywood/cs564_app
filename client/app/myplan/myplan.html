@@ -7,6 +7,25 @@
 " class="row row-content">
     <div class="col-xs-12 col-sm-9">
       <h2>My Meal Plan</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myplanCtrl.startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup ng-model="myplanCtrl.endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </div>
       <div class="table-responsive">
         <table class="table table-condensed table-bordered">
           <tr >
@@ -22,6 +41,9 @@
         </table>
       </div>
     </div>
+      <div class="col-xs-12 col-sm-3">
+          <h2>Favorites</h2>
+      </div>
   </div>
 
 </div>
