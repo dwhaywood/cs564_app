@@ -67,3 +67,7 @@
     }
 
 }
+
+.capitalize {
+   text-transform: capitalize;
+}

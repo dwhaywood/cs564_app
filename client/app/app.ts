@@ -31,6 +31,10 @@ import recipe from './recipe/recipe.component';
 import search from './search/search.component';
 import recipecard from './components/RecipeCard/RecipeCard.component';
 import likebutton from './components/LikeButton/LikeButton.component';
+import recipecardmini from './components/recipecardmini/recipecardmini.component';
+import querier from './querier/querier.service';
+import Recipe from './recipe/Recipe.service';
+import ScheduledMeal from './ScheduledMeal/ScheduledMeal.service';
 //import search from './search/search.component';
 
 
@@ -62,7 +66,11 @@ angular.module('cs564WebAppApp', [
     recipe,
     search,
     recipecard,
-    likebutton
+    likebutton,
+    recipecardmini,
+    querier,
+    Recipe,
+    ScheduledMeal
     //ngMessages
 ])
   .config(routeConfig)

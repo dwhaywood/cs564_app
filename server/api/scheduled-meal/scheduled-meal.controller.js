@@ -65,7 +65,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of ScheduledMeals
 export function index(req, res) {
-  return ScheduledMeal.findAll()
+  return ScheduledMeal.findAll({where:req.query})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

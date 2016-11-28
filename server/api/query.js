@@ -27,8 +27,9 @@ var namedQuery = function (req, res) {
         default:
             queryString = fs.readFileSync('./server/api/query.sql').toString();
     }
-    console.log("Running: "+queryString);
-   return db.sequelize.query(queryString, { type: db.sequelize.QueryTypes.RAW})
+    var replacements= JSON.parse(req.query.replacements);
+    console.log("Running: "+queryString+'\nWith replacements:'+replacements);
+   return db.sequelize.query(queryString, { type: db.sequelize.QueryTypes.RAW, replacements:replacements})
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
