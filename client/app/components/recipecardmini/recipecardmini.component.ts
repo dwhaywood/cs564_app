@@ -7,7 +7,8 @@ export class recipecardminiComponent {
     recipeid;
     Recipe;
     onRemove;
-    onRandom
+    onRandom;
+    onAdd;
     scheduledmeal;
     isScheduled;
     mealtime;
@@ -62,12 +63,15 @@ export class recipecardminiComponent {
     random = () => {
         this.onRandom({meal: this.mealtime, day: this.date});
     }
+    add = () => {
+        this.onAdd({meal: this.mealtime, day: this.date});
+    }
 }
 
 export default angular.module('cs564WebAppApp.recipecardmini', [])
   .component('recipecardmini', {
     template: require('./recipecardmini.html'),
-    bindings: { mealtime: '<', date: '<', title: '<', recipeid: '<', scheduledmeal: '<',recipedata: '<', onRemove: '&', onRandom: '&' },
+    bindings: { mealtime: '<', date: '<', title: '<', recipeid: '<', scheduledmeal: '<',recipedata: '<', onRemove: '&', onRandom: '&', onAdd: '&' },
     controller: recipecardminiComponent
   })
   .name;

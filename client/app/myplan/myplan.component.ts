@@ -6,6 +6,7 @@ var _ = require('lodash');
 
 import routes from './myplan.routes';
 import './myplan.css';
+import RecipeSelectModal from './recipeselectmodal/recipeselectmodal.component'
 
 export class MyplanComponent {
     startDate;
@@ -20,9 +21,10 @@ export class MyplanComponent {
     meals;
     Recipe; //Recipe resource
     $scope;
+    $uibModal
     
     /*@ngInject*/
-    constructor($location,Auth,ScheduledMeal,$scope,Recipe) {
+    constructor($location,Auth,ScheduledMeal,$scope,Recipe,$uibModal) {
         this.locationParams = $location.search();
         this.Auth = Auth
         this.currDate = new Date;
@@ -36,6 +38,7 @@ export class MyplanComponent {
         }
         this.meals = ['breakfast','lunch','dinner']; //Can add others if needed
         this.$scope = $scope;
+        this.$uibModal=$uibModal;
         //this.$scope.$watchGroup(() => [this.startDate,this.endDate],this.validateDates);
         this.$scope.$watch(() => this.startDate,()=>{
            console.log('Start Date: ' + this.startDate.toString());
@@ -127,8 +130,32 @@ export class MyplanComponent {
                 
                 this.viewScheduleData[meal][_.findIndex(this.viewScheduleData[meal],{date:day})].recipedata = recipe;
             });
+
+    }
+    
+    //Launch modal
+    items = ['item1', 'item2', 'item3'];
+    addRecipe(day,meal) {
         
-        
+        var modalInstance = this.$uibModal.open({
+          animation: true,
+          component: 'recipeselectmodal',
+          size: 'lg',
+          resolve: {
+            day: function () {
+              return new Date(day);
+                },
+            meal: function () {
+                return meal;
+                }
+            }
+          });
+
+        modalInstance.result.then(function (selectedItem) {
+          this.selected = selectedItem;
+        }, function () {
+          console.log('modal-component dismissed at: ' + new Date());
+        });
     }
     
     //Functions for date controllers
@@ -200,7 +227,7 @@ export class MyplanComponent {
     
 }
 
-export default angular.module('cs564WebAppApp.myplan', [ngRoute])
+export default angular.module('cs564WebAppApp.myplan', [ngRoute,RecipeSelectModal])
   .config(routes)
   .component('myplan', {
     template: require('./myplan.html'),

@@ -30,7 +30,7 @@ export class ConsoleComponent {
     runQuery() {
         this.getParams();
         if(this.queryUrl) {
-            this.$http.get('/api/'+this.queryUrl,{params:{ replacements:this.replacements}}).then((response)=>{
+            this.$http.get('/api/query/'+this.queryUrl,{params:{ replacements:this.replacements}}).then((response)=>{
                 this.queryResponse = response.data[0];
                 this.queryColumns= (<any>Object).keys(this.queryResponse[0]);
             }

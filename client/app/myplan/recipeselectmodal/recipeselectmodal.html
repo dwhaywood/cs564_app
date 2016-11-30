@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Select A Recipe for <span class="capitalize">{{$ctrl.mealtime}}</span> on {{$ctrl.date.toDateString()}} </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="container">
+        <div class="row"><div class="col-sm-6"><h3>Favorites</h3></div><div class="col-sm-6"><h3>Suggested</h3></div></div>
+        <div class="row">
+            <div class="col-sm-6"> <!--Favorite Recipes-->
+                <table>
+                    <tr ng-repeat="recipe in $ctrl.favoriteRecipes">
+                        <td>{{recipe.recipeName}}</td>
+                    </tr>
+                </table>
+            </div><!--End Favorite Recipes -->
+            <div class="col-sm-6"> <!--Suggested Recipes-->
+                <table>
+                    <tr ng-repeat="recipe in $ctrl.suggestedRecipes">
+                        <td>{{recipe.recipeName}}</td>
+                    </tr>
+                </table>
+            </div> <!--End Suggested Recipes-->
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+</div>
