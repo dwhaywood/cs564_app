@@ -12,6 +12,8 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Recipe} from '../../sqldb';
+import _ from 'lodash';
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -76,6 +78,26 @@ export function show(req, res) {
     where: {
       _id: req.params.id
     }
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Gets a random Recipe from the DB
+export function random(req, res) {
+    
+    return Recipe.findAll({
+            attributes: ['_id']
+        }).then(    
+            _.sample
+        )
+        .then((recipe)=>{
+            return Recipe.find({
+                where: {
+                  _id: recipe._id
+        }
+    });
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

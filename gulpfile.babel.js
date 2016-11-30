@@ -487,6 +487,7 @@ gulp.task('build', cb => {
             'copy:assets',
             'copy:fonts:dist',
             'copy:server',
+            'copy:distdb',
             'webpack:dist'
         ],
         'revReplaceWebpack',
@@ -554,6 +555,12 @@ gulp.task('copy:fonts:dist', () => {
     return gulp.src('node_modules/{bootstrap,font-awesome}/fonts/*')
         .pipe(flatten())
         .pipe(gulp.dest(`${paths.dist}/${clientPath}/assets/fonts`));
+});
+
+gulp.task('copy:distdb', () =>{
+    return gulp.src(
+        './dist.sqlite')
+        .pipe(gulp.dest(paths.dist,{overwrite: true}));
 });
 
 gulp.task('copy:assets', () => {

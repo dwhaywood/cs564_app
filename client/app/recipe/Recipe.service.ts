@@ -9,7 +9,9 @@ export function RecipeService($resource) {
   var meaningOfLife = 42;
 
   // Public API here
-  return $resource('/api/recipe/:id',{id: '@_id'});
+  return $resource('/api/recipes/:id',{id: '@_id'},{
+      random: {method: 'GET', url: '/api/recipes/random'}
+  });
 }
 
 

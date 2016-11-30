@@ -6,6 +6,7 @@ var controller = require('./recipe.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/random', controller.random);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);
