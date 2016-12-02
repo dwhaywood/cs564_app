@@ -21,6 +21,7 @@ import navbar from '../components/navbar/navbar.component';
 import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import console from './console/console.component';
+import userroute from './user/user.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import favs from './favs/favs.component';
@@ -70,7 +71,8 @@ angular.module('cs564WebAppApp', [
     recipecardmini,
     querier,
     Recipe,
-    ScheduledMeal
+    ScheduledMeal,
+    userroute
     //ngMessages
 ])
   .config(routeConfig)

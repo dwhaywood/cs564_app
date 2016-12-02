@@ -14,6 +14,7 @@
         <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
+        <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/user')}"><a href="/user">Me</a></li>
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/myplan')}"><a href="/myplan">My Plan</a></li>
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/mylist')}"><a href="/mylist">My List</a></li>   
         <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
