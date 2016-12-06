@@ -15,7 +15,10 @@
 
 .carousel-image {
   width: 100%;
+}
 
+.small-white {
+  color: white;
 }
 .hero-unit {
   position: relative;
