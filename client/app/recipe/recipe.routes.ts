@@ -3,7 +3,7 @@
 export default function($routeProvider) {
   'ngInject';
   $routeProvider
-    .when('/recipe', {
-      template: '<recipe></recipe>'
+    .when('/recipe/:id', {
+      template: '<recipe id="id"></recipe>',
     });
 }

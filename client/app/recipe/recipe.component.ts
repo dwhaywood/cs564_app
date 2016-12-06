@@ -6,10 +6,20 @@ const ngRoute = require('angular-route');
 import routes from './recipe.routes';
 
 export class RecipeComponent {
-    message;
+    Recipe;
+    recipeData;
+    nutritionInfo;
+    $http;
+    id;
   /*@ngInject*/
-  constructor() {
-    this.message = 'Hello';
+  constructor(Recipe,$http) {
+    this.Recipe =Recipe;
+      this.$http = $http;
+  }
+  $onInit = () => {
+      this.recipeData = this.Recipe.get({_id:this.id});
+      
+      
   }
 }
 

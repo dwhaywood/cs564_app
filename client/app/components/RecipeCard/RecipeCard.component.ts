@@ -25,7 +25,7 @@ export default angular.module('yes', [])
             </a> \
         <div class="title"> \
             <h3>\
-              <a href="#">{{ $ctrl.title }}</a> \
+              <a href="/recipe/{{$ctrl.recipeid}}">{{ $ctrl.title }}</a> \
             </h3> \
             <likebutton recipeid="$ctrl.recipeid"></likebutton>\
         </div> \
