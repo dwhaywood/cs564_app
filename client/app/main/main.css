@@ -13,8 +13,18 @@
   letter-spacing: -1px;
 }
 
+.carousel-inner {
+
+}
 .carousel-image {
   width: 100%;
+}
+
+.carousel {
+    background:#1e1e1e;
+}
+.carousel .item {
+  height: 500px;
 }
 
 .small-white {
