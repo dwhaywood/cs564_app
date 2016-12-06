@@ -20,7 +20,11 @@
   width: 100%;
 }
 
-.carousel {
+.hero-unit {
+  padding: 0px;
+}
+
+.carousel, .hero-unit {
     background:#1e1e1e;
 }
 .carousel .item {
