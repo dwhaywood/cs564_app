@@ -2,16 +2,14 @@
 const angular = require('angular');
 
 export class RecipeCardComponent {
-    description;
     title;
     image;
     liked;
     recipeid;
-    
+
   /*@ngInject*/
   constructor() {
     this.title = this.title || 'No Title';
-    this.description = this.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.';
     this.image = this.image || 'http://placehold.it/700x400';
   }
 }
@@ -29,7 +27,6 @@ export default angular.module('yes', [])
             </h3> \
             <likebutton recipeid="$ctrl.recipeid"></likebutton>\
         </div> \
-            <p>{{$ctrl.description}}</p> \
         </div> \
         ',
     bindings: { recipeid: '<', title: '<' },
