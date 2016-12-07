@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.carousel {
+.carousel, .hero-unit {
     background:#1e1e1e;
 }
 .carousel .item {
@@ -32,11 +32,11 @@
 }
 .hero-unit {
   position: relative;
-  padding: 30px 15px;
+  padding: 0px 0px;
   color: #F5F5F5;
   text-align: center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  background: #F4511E;
+  background:#1e1e1e;
 }
 
 .navbar-text {
