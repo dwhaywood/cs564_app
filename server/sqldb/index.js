@@ -39,6 +39,7 @@ db.NutritionAttributes = db.sequelize.import('../api/nutrition-attributes/nutrit
 
 db.Preferences = db.sequelize.import('../api/preferences/preferences.model');
 db.User = db.sequelize.import('../api/user/user.model');
+db.Friends = db.sequelize.import('../api/user/friends.model');
 
 //Define relationships
 db.ScheduledMeal = db.sequelize.import('../api/scheduled-meal/scheduled-meal.model');
