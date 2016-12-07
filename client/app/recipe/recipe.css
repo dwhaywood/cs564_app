@@ -90,8 +90,16 @@
     .nav>li:hover {
           background: #E53935;
 
-        }
+     }
 
+    .nav>li:selected {
+      background: #E53935;
+    }
+
+
+ .nav>p {
+   color: white
+ }
 
 
 }

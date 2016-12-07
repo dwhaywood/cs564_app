@@ -58,6 +58,11 @@
 
 .nav>li:hover {
   background: #E53935;
-
 }
+
+.nav>p {
+ color: white
+}
+
+
 

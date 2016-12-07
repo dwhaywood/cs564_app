@@ -11,3 +11,11 @@
 
     }
 
+
+ .nav>li:selected {
+   background: #E53935;
+ }
+
+ .nav>p {
+   color: white
+ }
