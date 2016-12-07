@@ -6,18 +6,124 @@
         <div class="row"><div class="col-sm-6"><h3>Favorites</h3></div><div class="col-sm-6"><h3>Suggested</h3></div></div>
         <div class="row">
             <div class="col-sm-6"> <!--Favorite Recipes-->
-                <table>
-                    <tr ng-repeat="recipe in $ctrl.favoriteRecipes">
-                        <td>{{recipe.recipeName}}</td>
-                    </tr>
-                </table>
-            </div><!--End Favorite Recipes -->
-            <div class="col-sm-6"> <!--Suggested Recipes-->
-                <table>
-                    <tr ng-repeat="recipe in $ctrl.suggestedRecipes">
-                        <td>{{recipe.recipeName}}</td>
-                    </tr>
-                </table>
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#MyRecipes" data-toggle="tab">My Recipes</a></li>
+                <li><a href="#MyFavs" data-toggle="tab">My Favorite Recipes</a></li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane fade" id="MyRecipes">
+                  <div class="row">
+                    <form>
+                      <div class="form-group col-lg-10">
+                        <input type="search" class="form-control input-lg" id="search" placeholder="Search Recipes">
+                      </div>
+
+                      <div class="col-lg-2">
+                        <button type="submit" class="btn btn-info btn-lg">Search Recipes</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.row -->
+
+                  <!-- Projects Row -->
+                  <div class="row">
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <button type="submit" class="btn btn-sm btn-info" ng-click="$ctrl.random()"><span class="glyphicon glyphicon-refresh"></span></button>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </div> <!-- my favs -->
+                <div class="tab-pane fade" id="MyFavs">
+                  <div class="row">
+                    <form>
+                      <div class="form-group col-lg-10">
+                        <input type="search" class="form-control input-lg" id="searchFavorites" placeholder="Search within favorites">
+                      </div>
+
+                      <div class="col-lg-2">
+                        <button type="submit" class="btn btn-info btn-lg">Search Favorites</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.row -->
+
+                  <!-- Projects Row -->
+                  <div class="row">
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                    <div class="col-md-4 recipe-item">
+                      <a href="#">
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </div> <!-- my favs -->
+              </div>
             </div> <!--End Suggested Recipes-->
         </div>
     </div>
