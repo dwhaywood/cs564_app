@@ -2,7 +2,6 @@
 const angular = require('angular');
 
 export class RecipeCardComponent {
-    description;
     title;
     image;
     liked;
@@ -42,6 +41,7 @@ export class RecipeCardComponent {
         });
     
     }
+
 }
 export default angular.module('cs564WebAppApp.RecipeCard', [])
   .component('recipecard', {
@@ -56,7 +56,6 @@ export default angular.module('cs564WebAppApp.RecipeCard', [])
             </h3> \
             <likebutton recipeid="$ctrl.recipeid"></likebutton>\
         </div> \
-            <p>{{$ctrl.description}}</p> \
         </div> \
         ',
     bindings: { recipeid: '<', title: '<' },
