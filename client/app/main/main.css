@@ -47,3 +47,11 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+.navbar {
+    background: #C62828;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #FFFFFF;
+}
