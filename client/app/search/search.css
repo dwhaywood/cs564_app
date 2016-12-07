@@ -36,14 +36,14 @@ form {
     background: #C62828;
 }
 
-.nav>p {
+.nav>a {
   color: white;
 }
 
 .nav>li:hover {
       background: #E53935;
 
-    }
+}
 
 
 .nav>li:selected {
