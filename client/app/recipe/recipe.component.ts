@@ -6,10 +6,34 @@ const ngRoute = require('angular-route');
 import routes from './recipe.routes';
 
 export class RecipeComponent {
-    message;
+    Recipe;
+    recipeData;
+    nutritionInfo;
+    $http;
+    id;
+    $routeParams
+    resolve;
   /*@ngInject*/
-  constructor() {
-    this.message = 'Hello';
+  constructor(Recipe,$http,$routeParams) {
+    this.Recipe =Recipe;
+      this.$http = $http;
+      this.$routeParams = $routeParams;
+      this.recipeData = {};
+  }
+  $onInit = () => {
+      this.id = this.$routeParams.id || this.resolve.id;
+      //console.log(this.id)
+      if (this.id) {
+          this.Recipe.get({id:this.id,includeIngredients: true, includeNutrients: true}, this.loaddata)
+          
+      }
+  }
+  $routerOnActive= (next) => {
+      this.id= next.params.id;
+  }
+  loaddata = (res) =>{
+      this.recipeData = res;
+      console.log(this.recipeData);
   }
 }
 
@@ -18,6 +42,7 @@ export default angular.module('cs564WebAppApp.recipe', [ngRoute])
   .component('recipe', {
     template: require('./recipe.html'),
     controller: RecipeComponent,
-    controllerAs: 'recipeCtrl'
+    controllerAs: 'recipeCtrl',
+    bindings: { id: '<', resolve: '<'}
   })
   .name;

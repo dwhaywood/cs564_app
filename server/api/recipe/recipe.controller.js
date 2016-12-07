@@ -12,6 +12,8 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Recipe} from '../../sqldb';
+import {Ingredient} from '../../sqldb';
+import {NutritionAttributes} from '../../sqldb';
 import _ from 'lodash';
 
 
@@ -74,11 +76,19 @@ export function index(req, res) {
 
 // Gets a single Recipe from the DB
 export function show(req, res) {
-  return Recipe.find({
-    where: {
-      _id: req.params.id
+    var findOptions = {
+        where: {
+          _id: req.params.id
+        },
+        include: []
+      };
+    if (req.query.includeIngredients) {
+        findOptions.include.push(Ingredient);
     }
-  })
+    if (req.query.includeNutrition) {
+        findOptions.include.push(NutritionAttributes);
+    }
+  return Recipe.find(findOptions)
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
