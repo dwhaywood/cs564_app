@@ -10,7 +10,7 @@ var NutritionAttributes = sqldb.NutritionAttributes;
 Recipe.find({where:{_id:528053}, include:[Ingredient]}).then((result)=>{
     
     for (let ing of result.Ingredients) {
-        console.log(ing.ingredientName);
+        console.log(ing.get());
         console.log(ing.RecipeIngredients.originalString);
     }
     
