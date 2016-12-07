@@ -5,18 +5,26 @@
 
 
 <!-- Page Content -->
-<div class="container">
+<br/>
+<div class="container-fluid">
 
   <!-- Heading Row -->
   <div class="row">
     <div class="col-md-8">
-      <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+      <img class="img-responsive img-rounded" src="{{recipeCtrl.recipeData.imageAddress}}" width="350px" height="900px" alt="">
     </div>
     <!-- /.col-md-8 -->
     <div class="col-md-4">
-      <h1 ng-bind="{{$ctrl.recipeData.recipeName}}">Recipe Title</h1>
-      <p ng-bind="{{$ctrl.recipeData.description}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-      <button type="submit" class="btn btn-info btn-sm">Favorite <span class="glyphicon glyphicon-heart"></span></button>
+      <h1 ng-bind="recipeCtrl.recipeData.recipeName">Recipe Title</h1>
+      <p>
+        <ul>
+            <li><strong>Servings: </strong><span ng-bind="recipeCtrl.recipeData.servings"></span>
+            </li>
+            <li><strong>Ready in: </strong><span ng-bind="recipeCtrl.recipeData.readyInMinutes"> </span> minutes
+            </li>
+        </ul>
+      </p>
+      <likebutton recipeid="reacipeCtrl.recipeData._id"></likebutton>
     </div>
     <!-- /.col-md-4 -->
   </div>
@@ -29,35 +37,16 @@
   <div class="row">
     <div class="col-lg-12">
       <h2>Ingredients</h2>
-      <p ng-bind="{{$ctrl.recipeData.ingredientDescription}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+      <p ng-bind="{{recipeCtrl.recipeData.ingredientDescription}}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
       <div id="ingredient-list col-lg-12">
 
-        <div class="ingredient-list-item" ng-repeat="ingredient in $ctrl.recipeData.ingredients">
-            <div class="ingredient-image col-lg-4">
+        <div class="ingredient-list-item" ng-repeat="ingredient in recipeCtrl.recipeData.Ingredients | orderBy:'RecipeIngredients._id'">
+            <div class="ingredient-image col-sm-4">
               <img src="{{ingredient.image}}">
             </div>
-            <div class="ingredient-amount col-lg-4"><h4>5 ounces</h4>
+            <div class="ingredient-amount col-sm-8"><h4 ng-bind="ingredient.RecipeIngredients.originalString">5 ounces</h4>
             </div>
-            <div class="ingredient-name col-lg-4"><h4>cheddar cheese</h4></div>
-        </div>
-
-        <div class="ingredient-list-item">
-          <div class="ingredient-image col-lg-4">
-            <img src="https://spoonacular.com/cdn/ingredients_100x100/salt.jpg">
-          </div>
-          <div class="ingredient-amount col-lg-4"><h4>1 teaspoon</h4>
-          </div>
-          <div class="ingredient-name col-lg-4"><h4>kosher salt</h4></div>
-        </div>
-
-
-        <div class="ingredient-list-item">
-          <div class="ingredient-image col-lg-4">
-            <img src="https://spoonacular.com/cdn/ingredients_100x100/onion-powder.jpg">
-          </div>
-          <div class="ingredient-amount col-lg-4"><h4>1/8 teaspoon</h4>
-          </div>
-          <div class="ingredient-name col-lg-4"><h4>onion powder</h4></div>
+<!--            <div class="ingredient-name col-sm-4"><h4>cheddar cheese</h4></div>-->
         </div>
       </div>
     </div>
@@ -68,8 +57,8 @@
     <!-- /.col-md-4 -->
     <div class="col-lg-12">
       <h2>Instructions</h2>
-      <p>Read the detailed instructions on</p>
-      <a href="#" class="recipe-instructions">Insert the link to the instructions</a>
+      <p>Read the detailed instructions on:</p>
+      <a href="{{recipeCtrl.recipeData.sourceURL}}_blank" class="recipe-instructions" ng-bind="recipeCtrl.recipeData.sourceName"></a>
     </div>
 
 
@@ -238,15 +227,6 @@
   </div>
 <hr>
   <!-- /.row -->
-
-  <!-- Footer -->
-  <footer>
-    <div class="row">
-      <div class="col-lg-12">
-        <p>Copyright &copy; Eat Better 2016</p>
-      </div>
-    </div>
-  </footer>
 
 </div>
 <!-- /.container -->
