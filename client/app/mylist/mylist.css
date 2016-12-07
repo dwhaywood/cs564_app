@@ -92,6 +92,9 @@
 
     }
 
+  .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+       color: white;
+  }
    .nav>a {
      color: white
    }
