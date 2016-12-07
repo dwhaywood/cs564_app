@@ -43,3 +43,9 @@ p {
 .nav>li {
   color: white;
 }
+
+.nav>li:hover {
+      background: #E53935;
+
+ }
+

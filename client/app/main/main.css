@@ -51,3 +51,13 @@
 .navbar {
     background: #C62828;
 }
+
+.nav>li {
+  color: white;
+}
+
+.nav>li:hover {
+  background: #E53935;
+
+}
+
