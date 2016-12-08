@@ -2,16 +2,20 @@
     color: #FFFFFF;
 }
 
-.navbar {
-    background: #C62828;
+.navbar-inverse .navbar-nav>li {
+    color: #FFFFFF;
 }
 
-.navbar-inverse .navbar-nav>li>a {
-    color: #FFFFFF;
+.navbar-nav>li>a:hover {
+    color: #E53935
 }
 footer {
     margin: 50px 0;
     padding: 30px 0;
+}
+
+.navbar-nav>li {
+    color: #FFFFFF;
 }
 
 
@@ -23,6 +27,10 @@ footer {
     padding: 0 15px;
 }
 
+.navbar {
+    background: #C62828;
+}
+
 
 h2 {
   margin-top: 24px;
@@ -31,3 +39,25 @@ h2 {
 p {
   color: grey;
 }
+
+.nav>li {
+  color: white;
+}
+
+.nav>a {
+  color: white
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-brand>li>a {
+     color: white;
+}
+
+.nav>li:hover {
+      background: #E53935;
+
+ }
+
+ .nav>li:selected {
+   background: #E53935;
+ }
+

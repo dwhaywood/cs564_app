@@ -54,14 +54,6 @@
         color: #FFFFFF;
     }
 
-    .navbar {
-        background: #F4511E;
-    }
-
-    .navbar-inverse .navbar-nav>li>a {
-        color: #FFFFFF;
-    }
-
     .recipe-item {
         margin-bottom: 25px;
     }
@@ -86,5 +78,26 @@
     form {
       align: center;
     }
+
+    .navbar {
+        background: #C62828;
+    }
+
+    .nav>li {
+      color: white;
+    }
+
+    .nav>li:hover {
+      background: #E53935;
+
+    }
+
+  .navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-brand>li>a {
+       color: white;
+  }
+   .nav>a {
+     color: white
+   }
+
 
 }
