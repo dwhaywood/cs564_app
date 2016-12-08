@@ -22,6 +22,7 @@ export class MyplanComponent {
     Recipe; //Recipe resource
     $scope;
     $uibModal
+    currentUser
     
     /*@ngInject*/
     constructor($location,Auth,ScheduledMeal,$scope,Recipe,$uibModal) {
@@ -48,11 +49,11 @@ export class MyplanComponent {
            console.log('End Date: ' + this.endDate.toString());
             this.validateAndUpdateDates();
         });
-        
+        this.currentUser = this.Auth.getCurrentUserSync();
     }
     //Retrieve scheduled meals for the user from server
     getScheduledMeals =  () => {
-        return this.ScheduledMeal.query({UserId:1});
+        return this.ScheduledMeal.scheduled({UserId:this.currentUser, startDate: this.startDate, endDate: this.endDate});
     }
     //Initialization
     $onInit = () => {
@@ -98,7 +99,13 @@ export class MyplanComponent {
             let valid = this.validateDates();
         
             if (valid) {
-                this.buildViewData();
+                this.getScheduledMeals().$promise.then((res) => {
+                    console.log(res);
+                    this.scheduledMeals = res;
+                    this.loaded = true;
+                    this.buildViewData();
+                })
+                
             }
             
         
@@ -127,8 +134,9 @@ export class MyplanComponent {
             this.Recipe.random({meal:meal,day:day}, ()=>{
                 
                 console.log(recipe)
-                
+                this.ScheduledMeal.post({date:day,UserId:this.currentUser, timeOfDay: meal,RecipeId: recipe._id},()=>{console.log('Scheduled Recipe!')})
                 this.viewScheduleData[meal][_.findIndex(this.viewScheduleData[meal],{date:day})].recipedata = recipe;
+                
             });
 
     }
