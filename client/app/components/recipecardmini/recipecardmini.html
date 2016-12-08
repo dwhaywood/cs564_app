@@ -4,7 +4,7 @@
 </a>
 <div class="title">
     <h4>
-    <a href="/recipe/{{$ctrl.recipedata._id}}">{{$ctrl.title}}</a>
+    <a ng-click="$ctrl.recipeDetail($ctrl.recipeid)">{{$ctrl.title}}</a>
     </h4>
         <button type="submit" class="btn btn-sm btn-info" ng-click="$ctrl.random()"><span class="glyphicon glyphicon-refresh"></span></button>
         <ng-switch on="$ctrl.isScheduled">

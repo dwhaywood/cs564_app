@@ -5,6 +5,7 @@ var Ingredient = sqldb.Ingredient;
 var Unit = sqldb.Unit;
 var Recipe = sqldb.Recipe;
 var RecipeDiet = sqldb.RecipeDiet;
+
 var RecipeCuisine = sqldb.RecipeCuisine;
 var RecipeIngredients = sqldb.RecipeIngredients;
 var NutritionAttributes = sqldb.NutritionAttributes;

@@ -101,3 +101,8 @@
 
 
 }
+
+.capitalize {
+   text-transform: capitalize;
+}
+

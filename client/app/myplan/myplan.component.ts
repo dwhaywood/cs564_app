@@ -21,14 +21,17 @@ export class MyplanComponent {
     meals;
     Recipe; //Recipe resource
     $scope;
-    $uibModal
-    currentUser
+    $uibModal;
+    currentUser;
+    querier;
     
     /*@ngInject*/
-    constructor($location,Auth,ScheduledMeal,$scope,Recipe,$uibModal) {
+    constructor($location,Auth,ScheduledMeal,$scope,Recipe,$uibModal,querier) {
         this.locationParams = $location.search();
-        this.Auth = Auth
-        this.currDate = new Date;
+        this.Auth = Auth;
+        this.querier = querier;
+        var today = new Date();
+        this.currDate = new Date(today.toDateString());
         this.ScheduledMeal = ScheduledMeal;
         this.Recipe = Recipe;
         this.viewScheduleData = {
@@ -49,11 +52,17 @@ export class MyplanComponent {
            console.log('End Date: ' + this.endDate.toString());
             this.validateAndUpdateDates();
         });
-        this.currentUser = this.Auth.getCurrentUserSync();
+        this.currentUser = Auth.getCurrentUserSync();
+        console.log('Current User: '); console.log( this.currentUser); //console.log(this.currentUser._id);
+        //this.currentUser().then((res)=>{console.log(res)});
     }
     //Retrieve scheduled meals for the user from server
     getScheduledMeals =  () => {
-        return this.ScheduledMeal.scheduled({UserId:this.currentUser, startDate: this.startDate, endDate: this.endDate});
+        //console.log(this.currentUser);
+        this.currentUser.$promise.then(()=>{
+            this.ScheduledMeal.scheduled({replacements:JSON.stringify({UserId:this.currentUser._id, startDate: this.startDate, endDate: this.endDate})}).$promise.then(this.loadScheduledData);
+        })
+        
     }
     //Initialization
     $onInit = () => {
@@ -61,14 +70,32 @@ export class MyplanComponent {
         this.startDate = new Date(this.currDate.setDate(this.currDate.getDate() - this.currDate.getDay())); //Defaultvto start of current week
         //this.endDate = new Date(this.locationParams.e) || this.startDate + 6; //Defaultvto start of current week
         this.endDate = new Date(this.currDate.setDate(this.startDate.getDate()+6)); //Defaultvto start of current week
-        this.getScheduledMeals().$promise.then((res) => {
-            this.scheduledMeals = res;
-            this.loaded = true;
-        })
+        //this.getScheduledMeals()
         //this.buildViewData();
         
     }
-
+    loadScheduledData = (res) =>{
+        this.scheduledMeals = formatScheduledMeals(res[0]);
+        console.log(this.scheduledMeals)
+        this.loaded = true;
+        this.buildViewData();
+        
+        function formatScheduledMeals(result) {
+            var out = {};
+            for (var key in result) {
+                if (result.hasOwnProperty(key)) {
+                    var meal = result[key];
+                    var day = new Date(meal.date);
+                    if (out[day.toDateString()] === undefined) {
+                        out[day.toDateString()] = {}
+                    }
+                    out[day.toDateString()][meal.timeOfDay]=meal;
+                }
+            }
+            return out;
+        }
+    }
+    
     //Build the object based on the input paramters that will be rendered by the template
     buildViewData = () => {
         this.viewScheduleData = {
@@ -79,14 +106,23 @@ export class MyplanComponent {
         }
         let daynames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
         for(var day = new Date(this.startDate); day <= this.endDate; day.setDate(day.getDate()+1)){
-            this.viewScheduleData['days'].push({date:day.toISOString(), dayname:daynames[day.getDay()],disp:moment(day).format('ddd M/D')})
+            this.viewScheduleData['days'].push({date:day.toDateString(), dayname:daynames[day.getDay()],disp:moment(day).format('ddd M/D')})
             
             for (let meal of this.meals){
-                this.viewScheduleData[meal].push({date:day.toISOString(), planned:false,mealid:'',recipedata: {}});
+                
+                var scheduledmeal = this.getScheduleMeal(day,meal);
+                this.viewScheduleData[meal].push({
+                    date: day.toDateString(), 
+                    planned: (!!scheduledmeal),
+                    mealid: _.get(scheduledmeal,['_id']),
+                    recipeid:_.get(scheduledmeal,['RecipeId']),
+                    recipedata: {},
+                    scheduledmeal: scheduledmeal
+                });
             }
             
         }
-        console.log(this.viewScheduleData);
+        //console.log(this.viewScheduleData);
     }
     //Return the recipeid for the meal scheduled on that date
     //date: Date the meal is scheduled for
@@ -94,17 +130,12 @@ export class MyplanComponent {
     findScheduledRecipe = function(date,meal){
         
     }
-    
+    //
     validateAndUpdateDates = () => {
             let valid = this.validateDates();
         
             if (valid) {
-                this.getScheduledMeals().$promise.then((res) => {
-                    console.log(res);
-                    this.scheduledMeals = res;
-                    this.loaded = true;
-                    this.buildViewData();
-                })
+                this.getScheduledMeals();
                 
             }
             
@@ -115,13 +146,14 @@ export class MyplanComponent {
     }
     
     //Callback when a meal is deleted    
-    removeMeal = (meal) => {
-        this.ScheduledMeal.delete({_id: meal._id}).then(()=>{
+    removeMeal = (id) => {
+        console.log("To be deleted:"); console.log(id)
+        this.ScheduledMeal.delete({id: id},()=>{
             //Rebuild all of the view data
-            this.buildViewData
+            this.getScheduledMeals();
             //Maybe just update the place where the meal came from?
             
-        }).catch((error) => {
+        },(error) => {
             console.log(error);
         })
         
@@ -133,14 +165,29 @@ export class MyplanComponent {
         var recipe = 
             this.Recipe.random({meal:meal,day:day}, ()=>{
                 
+                var scheduledmeal = this.getScheduleMeal(day,meal);
+                
+                if (scheduledmeal){
+                    this.removeMeal(scheduledmeal._id);
+                }
+                
                 console.log(recipe)
-                this.ScheduledMeal.post({date:day,UserId:this.currentUser, timeOfDay: meal,RecipeId: recipe._id},()=>{console.log('Scheduled Recipe!')})
-                this.viewScheduleData[meal][_.findIndex(this.viewScheduleData[meal],{date:day})].recipedata = recipe;
+                var date = new Date(day)
+                this.ScheduledMeal.save({date: date.toISOString(),UserId:this.currentUser._id, timeOfDay: meal,RecipeId: recipe._id},()=>{console.log('Scheduled Recipe!');this.getScheduledMeals()})
+                /*this.viewScheduleData[meal][_.findIndex(this.viewScheduleData[meal],{date:day})].recipedata = recipe;*/
+               
                 
             });
 
     }
-    
+    getScheduleMeal(date,mealTime){
+        
+        if (!(date instanceof Date)) {
+            date = new Date(date)
+        }
+        
+        return _.get(this.scheduledMeals,[date.toDateString(),mealTime]);
+    }
     //Launch modal
     items = ['item1', 'item2', 'item3'];
     addRecipe(day,meal) {
