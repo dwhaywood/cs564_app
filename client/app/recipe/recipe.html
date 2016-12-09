@@ -22,9 +22,10 @@
             </li>
             <li><strong>Ready in: </strong><span ng-bind="recipeCtrl.recipeData.readyInMinutes"> </span> minutes
             </li>
+            <li ng-bind="recipeCtrl.recipeData._id"></li>
         </ul>
       </p>
-      <likebutton recipeid="reacipeCtrl.recipeData._id"></likebutton>
+      <likebutton recipeid="recipeCtrl.recipeData._id"></likebutton>
     </div>
     <!-- /.col-md-4 -->
   </div>

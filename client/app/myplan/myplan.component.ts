@@ -189,9 +189,9 @@ export class MyplanComponent {
         return _.get(this.scheduledMeals,[date.toDateString(),mealTime]);
     }
     //Launch modal
-    items = ['item1', 'item2', 'item3'];
+    //items = ['item1', 'item2', 'item3'];
     addRecipe(day,meal) {
-        
+        var userid = this.currentUser._id;
         var modalInstance = this.$uibModal.open({
           animation: true,
           component: 'recipeselectmodal',
@@ -202,7 +202,11 @@ export class MyplanComponent {
                 },
             meal: function () {
                 return meal;
+                },
+              user: function ()  {
+                return userid;
                 }
+              
             }
           });
 

@@ -2,124 +2,58 @@
     <h3 class="modal-title" id="modal-title">Select A Recipe for <span class="capitalize">{{$ctrl.mealtime}}</span> on {{$ctrl.date.toDateString()}} </h3>
 </div>
 <div class="modal-body" id="modal-body">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6"> <!--Favorite Recipes-->
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#MyRecipes" data-toggle="tab">My Recipes</a></li>
-                <li><a href="#MyFavs" data-toggle="tab">My Favorite Recipes</a></li>
-              </ul>
-
+                <div class="row">
+                    <div class="col-sm-7"> <!--Favorite Recipes-->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#MyFavs" data-toggle="tab">My Favorite Recipes</a></li>
+                        <li ><a href="#MyRecipes" data-toggle="tab">Suggested Recipes</a></li>
+                      </ul>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4"><input type="search" class="form-control input-md" ng-model="$ctrl.resultsFilter" placeholder="Filter results"></div>
+                </div>
               <div class="tab-content">
-                <div class="tab-pane fade" id="MyRecipes">
-                  <div class="row">
-                    <form>
-                      <div class="form-group col-lg-10">
-                        <input type="search" class="form-control input-lg" id="search" placeholder="Search Recipes">
-                      </div>
-
-                      <div class="col-lg-2">
-                        <button type="submit" class="btn btn-info btn-lg">Search Recipes</button>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.row -->
-
-                  <!-- Projects Row -->
-                  <div class="row">
-                    <div class="col-md-4 recipe-item">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                      <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
-                    <div class="col-md-4 recipe-item">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
-                    <div class="col-md-4 recipe-item">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                      <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
-                  </div>
-                  <!-- /.row -->
-                </div> <!-- my favs -->
+                <!-- my favs -->
                 <div class="tab-pane fade" id="MyFavs">
-                  <div class="row">
-                    <form>
-                      <div class="form-group col-lg-10">
-                        <input type="search" class="form-control input-lg" id="searchFavorites" placeholder="Search within favorites">
-                      </div>
-
-                      <div class="col-lg-2">
-                        <button type="submit" class="btn btn-info btn-lg">Search Favorites</button>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.row -->
-
                   <!-- Projects Row -->
                   <div class="row">
-                    <div class="col-md-4 recipe-item">
+                    <div class="col-md-3 recipe-item" ng-repeat="recipe in $ctrl.myrecipes">
                       <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
+                        <img class="img-responsive image" src="http://placehold.it/200x150" height="200px" width="150px" alt="">
                       </a>
                       <h3>
                         <a href="#">Recipe Title</a>
                       </h3>
-                     <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
-                    <div class="col-md-4 recipe-item">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                     <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
-                    <div class="col-md-4 recipe-item">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                     <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add()"><span class="glyphicon glyphicon-plus"></span></button>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add(recipe)"><span class="glyphicon glyphicon-plus"></span></button>
                       </ng-switch>
                     </div>
                   </div>
                   <!-- /.row -->
                 </div> <!-- my favs -->
+                <div class="tab-pane fade" id="MyRecipes">
+                  <!-- Projects Row -->
+                  <div class="row">
+                    <div class="col-md-3 recipe-item" ng-repeat="recipe in $ctrl.myrecipes">
+                      <a href="#">
+                        <img class="img-responsive image" src="http://placehold.it/200x150" height="200px" width="150px" alt="">
+                      </a>
+                      <h3>
+                        <a href="#">Recipe Title</a>
+                      </h3>
+                      <ng-switch on="">
+                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add(recipe)"><span class="glyphicon glyphicon-plus"></span></button>
+                      </ng-switch>
+                    </div>
+                  </div>
+                  <!-- /.row -->
+                </div> 
               </div>
-            </div> <!--End Suggested Recipes-->
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
 </div>

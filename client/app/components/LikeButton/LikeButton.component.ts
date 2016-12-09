@@ -15,6 +15,7 @@ export class LikeButtonComponent {
     this.liked = false;
     this.isLoggedIn = Auth.isLoggedInSync;
     this.currentUser = Auth.getCurrentUserSync();
+    console.log(this.recipeid);
     }
     $onInit = () => {
         this.$http.get('/api/preferences',{params:{UserId:this.currentUser._id, RecipeId: this.recipeid }}).then((res) => {
@@ -31,6 +32,31 @@ export class LikeButtonComponent {
         
         
     };
+    $onChanges = (changes) => {
+        //this.loaded = false;
+        //console.log(changes);
+        for (let change in changes){
+            switch (change){
+                case 'recipeid':
+                    if (this.recipeid) {
+                        this.$http.get('/api/preferences',{params:{UserId:this.currentUser._id, RecipeId: this.recipeid }}).then((res) => {
+                            var liked = res.data[0]
+
+                            if (liked) {
+                                this._id = liked._id;
+                                this.liked=true;
+                            } else {
+                                this.liked = false;
+                            }
+                            this.ready = true;
+                        },console.error);
+                        }
+                    break;
+                default:
+            }
+                    
+        }
+    }
     likeThis(){
         this.liked = !this.liked;
         if (this.liked) {

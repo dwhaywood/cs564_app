@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Preferences} from '../../sqldb';
+import {Recipe} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -65,7 +66,8 @@ function handleError(res, statusCode) {
 
 // Gets a list of Preferencess
 export function index(req, res) {
-  return Preferences.findAll({where: req.query})
+
+  return Preferences.findAll({where: req.query, include: [Recipe]})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
