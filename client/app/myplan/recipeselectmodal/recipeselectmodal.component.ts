@@ -43,6 +43,7 @@ export class recipeselectmodalComponent {
         this.querier.query({name: 'FindRecipesFromFriends', replacements:JSON.stringify({UserId: this.user})},(results) =>{
             console.log(results);
             this.suggestedRecipes = results[0];
+            this.loadAllSuggestedRecipes();
         },console.error);
     }
     loadAllFavRecipes(){
@@ -60,21 +61,23 @@ export class recipeselectmodalComponent {
     }
     loadAllSuggestedRecipes(){
         var allfavpromises = [];
-        /*for (var fav in this.suggestedRecipes) {
+        for (var fav in this.suggestedRecipes) {
             if (this.suggestedRecipes.hasOwnProperty(fav)){
                  allfavpromises.push(this.Recipe.get({id:this.suggestedRecipes[fav].RecipeId}))
             }
            
-        }*/
-        for (var fav of this.suggestedRecipes) {
+        }
+        console.log('Suggested recipes:', this.suggestedRecipes);
+        /*for (var fav of this.suggestedRecipes) {
             allfavpromises.push(this.Recipe.get({id:fav.RecipeId}))
            
-        }
+        }*/
         Promise.all(allfavpromises).then((results)=>{
            for (var result of results) {
-               this.favoriteRecipes[results.indexOf(result)].data = result;
+               this.suggestedRecipes[results.indexOf(result)].data = result;
            }
             this.suggestedLoaded = true;
+             console.log('Suggested recipes:', this.suggestedRecipes);
         });
         
     }

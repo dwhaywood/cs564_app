@@ -9,10 +9,12 @@ import sqldb from './sqldb';
 import config from './config/environment';
 import http from 'http';
 
+/*
 
 var throng = require('throng');
 
 var WORKERS = process.env.WEB_CONCURRENCY || 4;
+*/
 
 /*throng({
   workers: WORKERS ,
