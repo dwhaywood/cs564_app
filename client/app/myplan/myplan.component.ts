@@ -190,7 +190,7 @@ export class MyplanComponent {
     }
     //Launch modal
     //items = ['item1', 'item2', 'item3'];
-    addRecipe(day,meal) {
+    addRecipe = (day,meal) => {
         var userid = this.currentUser._id;
         var modalInstance = this.$uibModal.open({
           animation: true,
@@ -210,8 +210,10 @@ export class MyplanComponent {
             }
           });
 
-        modalInstance.result.then(function (selectedItem) {
-          this.selected = selectedItem;
+        modalInstance.result.then((selectedItem) => {
+          console.log('Selected recipe:');console.log(selectedItem)
+          var date = new Date(day)
+          this.ScheduledMeal.save({date: date.toISOString(),UserId:this.currentUser._id, timeOfDay: meal,RecipeId: selectedItem},()=>{console.log('Scheduled Recipe!');this.getScheduledMeals()})
         }, function () {
           console.log('modal-component dismissed at: ' + new Date());
         });

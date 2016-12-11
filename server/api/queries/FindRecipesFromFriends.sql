@@ -20,7 +20,7 @@ WHERE Preferences.RecipeId IN
      WHERE Preferences.UserId IN
         (SELECT Friends.FriendId
          FROM Friends
-         WHERE _id = :UserId)
+         WHERE UserId = :UserId)
     )
 AND Preferences.RecipeId NOT IN
     (SELECT DISTINCT Preferences.RecipeId

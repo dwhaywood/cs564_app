@@ -66,8 +66,8 @@ function handleError(res, statusCode) {
 
 // Gets a list of Preferencess
 export function index(req, res) {
-
-  return Preferences.findAll({where: req.query, include: [Recipe]})
+    console.log(req.query);
+  return Preferences.findAll({where: req.query})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

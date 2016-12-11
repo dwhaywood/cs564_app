@@ -11,7 +11,7 @@ export function RecipeService($resource) {
   // Public API here
   return $resource('/api/recipes/:id',{id: '@_id'},{
       random: {method: 'GET', url: '/api/recipes/random'},
-      get: {method: 'GET', cache: true}
+      //get: {method: 'GET', cache: true}
   });
 }
 

@@ -4,6 +4,7 @@ const ngRoute = require('angular-route');
 
 
 import routes from './recipe.routes';
+import './recipe.css';
 
 export class RecipeComponent {
     Recipe;
@@ -13,6 +14,7 @@ export class RecipeComponent {
     id;
     $routeParams
     resolve;
+    close;
   /*@ngInject*/
   constructor(Recipe,$http,$routeParams) {
     this.Recipe =Recipe;
@@ -28,6 +30,9 @@ export class RecipeComponent {
           
       }
   }
+    cancel() {
+      this.close({$value: 'cancel'});
+    };
   $routerOnActive= (next) => {
       this.id= next.params.id;
   }
@@ -43,6 +48,6 @@ export default angular.module('cs564WebAppApp.recipe', [ngRoute])
     template: require('./recipe.html'),
     controller: RecipeComponent,
     controllerAs: 'recipeCtrl',
-    bindings: { id: '<', resolve: '<'}
+    bindings: { id: '<', resolve: '<', close: '&'}
   })
   .name;

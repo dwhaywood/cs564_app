@@ -62,6 +62,25 @@
         margin-bottom: 25px;
     }
 
+    a.boxclose{
+    float:right;
+    margin-top:-10px;
+    margin-right:-10px;
+    cursor:pointer;
+    color: #fff;
+    border: 1px solid #AEAEAE;
+    border-radius: 30px;
+    background: #605F61;
+    font-size: 22px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 5px;       
+    }
+
+    .boxclose:hover {
+        text-decoration: none;
+    }
     .page-header, a {
         color: #2196F3;
     }

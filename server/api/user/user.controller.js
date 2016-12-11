@@ -1,8 +1,22 @@
 'use strict';
 
 import {User} from '../../sqldb';
+import {Friends} from '../../sqldb';
+import {Recipe} from '../../sqldb';
+import {Preferences} from '../../sqldb';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+
+
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if(entity) {
+      return res.status(statusCode).json(entity);
+    }
+    return null;
+  };
+}
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -60,7 +74,6 @@ export function create(req, res) {
  */
 export function show(req, res, next) {
   var userId = req.params.id;
-
   return User.find({
     where: {
       _id: userId
@@ -74,6 +87,110 @@ export function show(req, res, next) {
     })
     .catch(err => next(err));
 }
+/**
+ * Get a single user's info (eventually only public info)
+ */
+export function userinfo(req, res, next) {
+  var userId = req.query.userid;
+  return User.find({
+    where: {
+      _id: userId
+    }
+  })
+    .then(user => {
+      if(!user) {
+        return res.status(404).end();
+      }
+      res.json(user.profile);
+    })
+    .catch(err => next(err));
+}
+
+
+/**
+ * Get a single user's favorite recipes
+ */
+export function favorites(req, res, next) {
+  var userId = req.params.id;
+  return User.find({
+    where: {
+      _id: userId
+    },
+    include: [{association:Preferences}]
+  })
+    .then(user => {
+      if(!user) {
+        return res.status(404).end();
+      }
+      res.json(user.profile);
+    })
+    .catch(err => next(err));
+}
+/**
+ * Get a single user's friends
+ */
+export function friends(req, res, next) {
+  var userId = req.params.id;
+    console.log('Finding friends');
+    console.log(userId);
+  return Friends.findAll({
+    where: {
+      UserId: userId
+    }
+  })/*.then((friends)=>{
+      console.log('Result:');
+      console.log(friends);
+      var promises = [];
+      
+      for (var friend of friends) {
+          promises.push(User.findById(friend.FriendId));
+      }
+      return Promise.all(promises);
+      })
+    .then((results)=>{
+      var out = [];
+      for (var result of results){
+          out.push(result);
+      }
+      return out;
+    })*/
+    .then(respondWithResult(res))
+    .catch(err => next(err));
+}   
+
+/**
+ * Get a single user's friends
+ */
+export function addfriend(req, res, next) {
+  var userId = req.params.id;
+    console.log('Adding friends');
+    console.log(userId);
+    var friendId = req.body.FriendId;
+    if (!friendId) {throw {error: 'Must have a friend id'};}
+    return Friends.create({
+      UserId: userId,
+      FriendId: friendId
+    })
+    .then(respondWithResult(res))
+    .catch(err => next(err));
+}   
+/**
+ * Remove a single user's friends
+ */
+export function removefriend(req, res, next) {
+  var userId = req.params.id;
+    console.log('Adding friends');
+    console.log(userId);
+    var friendId = req.query.FriendId;
+    if (!friendId) {throw {error: 'Must have a friend id'};}
+    return Friends.destroy({
+        where: {
+          UserId: userId,
+          FriendId: friendId
+        }})
+    .then(respondWithResult(res))
+    .catch(err => next(err));
+}   
 
 /**
  * Deletes a user

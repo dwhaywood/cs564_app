@@ -1,3 +1,4 @@
+<a class="boxclose" ng-click="$ctrl.cancel()" id="boxclose"><span class="glyphicon glyphicon-remove"></span></a>
 <div class="modal-header">
     <h3 class="modal-title" id="modal-title">Select A Recipe for <span class="capitalize">{{$ctrl.mealtime}}</span> on {{$ctrl.date.toDateString()}} </h3>
 </div>
@@ -16,32 +17,38 @@
                 </div>
               <div class="tab-content">
                 <!-- my favs -->
-                <div class="tab-pane fade" id="MyFavs">
+                <div class="tab-pane fade active in" id="MyFavs">
                   <!-- Projects Row -->
+                    <br/>
                   <div class="row">
-                    <div class="col-md-3 recipe-item" ng-repeat="recipe in $ctrl.myrecipes">
-                      <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" height="200px" width="150px" alt="">
-                      </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
-                      </h3>
-                      <ng-switch on="">
-                        <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add(recipe)"><span class="glyphicon glyphicon-plus"></span></button>
-                      </ng-switch>
-                    </div>
+                      <div ng-show="$ctrl.favsLoaded" ng-repeat="recipe in $ctrl.favoriteRecipes | filter:$ctrl.resultsFilter as results">
+                        <div class="clearfix" ng-if="$index % 4 == 0"></div>
+                        <div  class="col-md-3 recipe-item" >
+                          <a href="#">
+                            <img class="img-responsive image" src="{{recipe.data.imageAddress}}" height="200px" width="150px" alt="">
+                          </a>
+                          <h3 ng-bind="recipe.data.recipeName">
+                              Recipe Title
+                            <!--<a href="#" ng-bind="recipe.data.recipeName">Recipe Title</a>-->
+                          </h3>
+                          <ng-switch on="">
+                            <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add(recipe.RecipeId)"><span class="glyphicon glyphicon-plus"></span></button>
+                          </ng-switch>
+                        </div>
+                      </div>
                   </div>
                   <!-- /.row -->
                 </div> <!-- my favs -->
                 <div class="tab-pane fade" id="MyRecipes">
                   <!-- Projects Row -->
                   <div class="row">
-                    <div class="col-md-3 recipe-item" ng-repeat="recipe in $ctrl.myrecipes">
+                    <div ng-show="$ctrl.suggestedLoaded" class="col-md-3 recipe-item" ng-repeat="recipe in $ctrl.suggestedRecipes">
                       <a href="#">
-                        <img class="img-responsive image" src="http://placehold.it/200x150" height="200px" width="150px" alt="">
+                        <img class="img-responsive image" ng-src="{{recipe.data.imageAddress}}" src="http://placehold.it/200x150" height="200px" width="150px" alt="">
                       </a>
-                      <h3>
-                        <a href="#">Recipe Title</a>
+                      <h3 ng-bind="recipe.data.recipeName">
+                          Recipe Title
+                        <!--<a href="#" ng-bind="recipe.data.recipeName">Recipe Title</a>-->
                       </h3>
                       <ng-switch on="">
                         <button ng-switch-default type="submit" class="btn btn-success btn-sm" ng-click="$ctrl.add(recipe)"><span class="glyphicon glyphicon-plus"></span></button>

@@ -5,10 +5,12 @@ var Ingredient = sqldb.Ingredient;
 var Unit = sqldb.Unit;
 var Recipe = sqldb.Recipe;
 var RecipeDiet = sqldb.RecipeDiet;
-
+var ScheduledMeal = sqldb.ScheduledMeal;
 var RecipeCuisine = sqldb.RecipeCuisine;
 var RecipeIngredients = sqldb.RecipeIngredients;
 var NutritionAttributes = sqldb.NutritionAttributes;
+var Friends = sqldb.Friends;
+var User = sqldb.User;
 
 
 var error_log = fs.createWriteStream('importerrors.txt');
@@ -327,7 +329,26 @@ function importMissingIngredients() {
            './server/data/ingredient_unique.csv');
 }
 
-loadRecipeIngredients();
+//loadRecipeIngredients();
+
+//ScheduledMeal.sync({force: true}).then(()=>{
+//    console.log('ScheduledMeals Synced');
+//});
+
+/*User.findAll().then((res)=>{
+    console.log(res);
+});*/
+
+Friends.sync({force: true}).then(()=>{
+    console.log('Friends synced.');
+    User.sync().then(()=>{
+        console.log('User synced.');
+        Friends.upsert({UserId: 539, FriendId: 1});
+        User.find({where: { _id: 539}, include: [{association: Friends}]}).then((res)=>{
+            console.log(res);
+        });
+    });
+});
 
 //importMissingIngredients();
 

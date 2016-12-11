@@ -345,7 +345,7 @@ gulp.task('serve', cb => {
     runSequence(
         [
             'clean:tmp',
-            'copydb',
+            //'copydb',
             'lint:scripts',
             'inject',
             'copy:fonts:dev',
