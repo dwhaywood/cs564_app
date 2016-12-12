@@ -8,8 +8,9 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    info: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+      attribute: DataTypes.STRING,
+      amount: DataTypes.DOUBLE,
+      unit: DataTypes.STRING,
+      percentDailyValue: DataTypes.DOUBLE
   });
 }

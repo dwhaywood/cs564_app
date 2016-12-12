@@ -34,6 +34,7 @@ db.RecipeCuisine = db.sequelize.import('../api/recipe/recipeCuisine.model');
 db.RecipeCuisine.belongsTo(db.Recipe);
 
 db.NutritionAttributes = db.sequelize.import('../api/nutrition-attributes/nutrition-attributes.model');
+db.NutritionAttributes.belongsTo(db.Recipe);
 
 //User specific models
 

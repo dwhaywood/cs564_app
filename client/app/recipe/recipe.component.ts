@@ -15,6 +15,8 @@ export class RecipeComponent {
     $routeParams
     resolve;
     close;
+    nutrientAttributes;
+    
   /*@ngInject*/
   constructor(Recipe,$http,$routeParams) {
     this.Recipe =Recipe;
@@ -29,6 +31,17 @@ export class RecipeComponent {
           this.Recipe.get({id:this.id,includeIngredients: true, includeNutrients: true}, this.loaddata)
           
       }
+      this.$http.get('/api/nutrition-attributess/',{params:{RecipeId: this.id}}).then((res)=>{
+        var attributes = res.data;
+        this.nutrientAttributes = {};
+        for (var attribute in attributes) {
+            if (attributes.hasOwnProperty(attribute)){
+                this.nutrientAttributes[attributes[attribute].attribute]= attributes[attribute];
+
+            }
+        }
+        console.log(this.nutrientAttributes);
+      });
   }
     cancel() {
       this.close({$value: 'cancel'});

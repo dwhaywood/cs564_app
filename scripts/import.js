@@ -1,4 +1,4 @@
-//process.env.NODE_ENV = 'development';
+//process.env['NODE_ENV'] = 'development';
 var fs = require('fs');
 var sqldb = require('../server/sqldb');
 var Ingredient = sqldb.Ingredient;
@@ -329,6 +329,24 @@ function importMissingIngredients() {
            './server/data/ingredient_unique.csv');
 }
 
+function importNutritionAttributes() {
+    console.log('Sync Nutrition Attributes');
+    NutritionAttributes.sync({force: true}).then(()=> {
+        console.log('Importing nutrition attributes');
+        importData(NutritionAttributes,{
+            attribute: 'ATTRIBUTE',
+            amount: 'AMOUNT',
+            unit: 'UNIT',
+            perecentDailyValue: 'PERCENT_DAILY_VALUE',
+            RecipeId: 'RECIPEID'
+            },
+           './server/data/nutrient_unique.csv');
+    });
+    
+}
+
+importNutritionAttributes();
+
 //loadRecipeIngredients();
 
 //ScheduledMeal.sync({force: true}).then(()=>{
@@ -339,7 +357,7 @@ function importMissingIngredients() {
     console.log(res);
 });*/
 
-Friends.sync({force: true}).then(()=>{
+/*Friends.sync({force: true}).then(()=>{
     console.log('Friends synced.');
     User.sync().then(()=>{
         console.log('User synced.');
@@ -348,7 +366,7 @@ Friends.sync({force: true}).then(()=>{
             console.log(res);
         });
     });
-});
+});*/
 
 //importMissingIngredients();
 
