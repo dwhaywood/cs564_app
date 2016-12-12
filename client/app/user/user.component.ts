@@ -19,14 +19,16 @@ export class UserComponent {
     Recipe
     currentUser
     User
+    $scope
     
     /*@ngInject*/
-    constructor($http,querier,Recipe,Auth,User) {
+    constructor($http,querier,Recipe,Auth,User,$scope) {
         this.$http = $http;
         this.querier = querier;
         this.Recipe = Recipe;
         this.currentUser = Auth.getCurrentUserSync();
         this.User = User;
+        this.$scope = $scope
     }
     $onInit(){
         
@@ -82,13 +84,19 @@ export class UserComponent {
         this.$http.post('/api/users/'+this.currentUser._id+'/friends', {FriendId:friendid}).then(()=>{
             console.log('Friend Added');
             this.reloadFriends();
+            this.reloadSuggestedFriends();
         })
     }
     loadMyFriends(){
         
     }
-    loadSuggestedFriends(){
-        
+    reloadSuggestedFriends(){
+         //Load suggested friends
+            this.querier.query({name: 'FindFriends', replacements:JSON.stringify({UserId: this.currentUser._id})},(results) =>{
+                    console.log(results);
+                    this.futureFriends = results[0];
+                    this.loadAllFuturefriends()
+                },console.error);
     }
     
     loadAllFavRecipes=()=>{
@@ -110,8 +118,7 @@ export class UserComponent {
         for (var friend in  this.futureFriends) {
             if ( this.futureFriends.hasOwnProperty(friend)){
                 this.futureFriends[friend].data = {}; 
-                this.futureFriends[friend].data.picture = {};
-                this.futureFriends[friend].data.picture.large = 'http://placehold.it/200x200?text=No+image';
+                this.futureFriends[friend].image = 'http://placehold.it/200x200?text=No+image';
                 allfuturepromises.push(this.User.getinfo({userid:this.futureFriends[friend].UserId}));
             }
            
@@ -126,7 +133,7 @@ export class UserComponent {
         var allfuturefriendimages = [];
         for (var friend in  this.futureFriends) {
             if ( this.futureFriends.hasOwnProperty(friend)){
-            allfuturefriendimages.push(this.$http.get('https://randomuser.me/api/?inc=picture&seed='+this.futureFriends[friend].UserId))
+            allfuturefriendimages.push(this.$http.get('https://randomuser.me/api/?inc=picture&seed='+this.futureFriends[friend].UserId,{cache: true, headers: {'Access-Control-Allow-Origin': '*'}}))
             }
         }
         Promise.all(allfuturefriendimages).then((results)=>{
@@ -135,6 +142,7 @@ export class UserComponent {
                this.futureFriends[i].image = result.data.results[0].picture.large;
                i++;
            }
+            this.$scope.$apply();
         });
     }
     loadAllMyFriends=()=>{
@@ -149,10 +157,11 @@ export class UserComponent {
            }
             this.myFriendsLoaded = true;
             this.myFriendsLoading = false;
+            
         });
         var allmyfriendimages = [];
         for (var fav of this.myFriends) {
-            allmyfriendimages.push(this.$http.get('https://randomuser.me/api/?inc=picture&seed='+fav.FriendId,{cache: false}))
+            allmyfriendimages.push(this.$http.get('https://randomuser.me/api/?inc=picture&seed='+fav.FriendId,{cache: true, headers: {'Access-Control-Allow-Origin': '*'}}))
             
         }
         Promise.all(allmyfriendimages).then((results)=>{
@@ -161,6 +170,7 @@ export class UserComponent {
                this.myFriends[i].image = result.data.results[0].picture.large;
                i++;
            }
+            this.$scope.$apply();
         });
     }
 }

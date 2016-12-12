@@ -55,7 +55,7 @@
         <div ng-show="userCtrl.futureFriendsLoaded" ng-repeat="friend in userCtrl.futureFriends">
             <div class="clearfix" ng-if="$index % 3 == 0"></div>
             <div class="col-lg-4 col-sm-6 text-center">
-              <img class="img-circle img-responsive center-block" width="200px" height="200px" ng-src="{{friend.data.picture.large}}" alt="">
+              <img class="img-circle img-responsive center-block" width="200px" height="200px" ng-src="{{friend.image}}" alt="">
               <h3 ng-bind="friend.data.name">User Name</h3>
             <button  type="submit" class="btn btn-success btn-sm" ng-click="userCtrl.addFriend(friend.UserId)"><span class="glyphicon glyphicon-plus"></span></button>
                 <br/>

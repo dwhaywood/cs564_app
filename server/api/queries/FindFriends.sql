@@ -24,7 +24,7 @@ AND Preferences.RecipeId IN
 AND Preferences.UserId NOT IN
     (SELECT Friends.FriendId
      FROM Friends
-     WHERE Friends._id = :UserId)
+     WHERE Friends.UserId = :UserId)
 GROUP BY Preferences.UserId
 HAVING COUNT(Preferences.UserId) > 1
 ORDER BY COUNT(Preferences.UserId) DESC LIMIT 30
