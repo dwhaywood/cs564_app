@@ -6,45 +6,45 @@
 <div class="container" id="shopping-list">
 
   <div id="facts" class="row row-content">
-    <div class="col-xs-12 col-sm-9">
+    <div class="col-xs-12 col-sm-12">
       <h2>Shopping List</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Start Date</span>
+              <input type="text" class="form-control" uib-datepicker-popup="{{mylistCtrl.format}}" ng-model="mylistCtrl.startDate" is-open="mylistCtrl.popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="mylistCtrl.altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="mylistCtrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <p class="input-group">
+                <span class="input-group-addon" id="basic-addon2">End Date</span>
+              <input type="text" class="form-control" uib-datepicker-popup="{{mylistCtrl.format}}" ng-model="mylistCtrl.endDate" is-open="mylistCtrl.popup2.opened" datepicker-options="mylistCtrl.dateOptions" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="mylistCtrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </div>
+        </div>
       <div class="table-responsive">
         <table class="table table-striped">
           <tr>
 
+            <th>Aisle</th>
+            <th>Item</th>
             <th>Amount</th>
             <th>Unit</th>
-            <th>Item</th>
-            <th>Aisle</th>
             <td>&nbsp;</td>
           </tr>
-          <tr>
-            <td class="shopping-list-amount">Amount 1</td>
-            <td class="shopping-list-unit">Unit 1</td>
-            <td class="shopping-list-item">Item 1</td>
-            <td class="shopping-list-aisle">Aisle 1</td>
-            <td><button type="submit" class="btn btn-info btn-sm">remove</button></td>
-          </tr>
-          <tr>
-            <td class="shopping-list-amount">Amount 2</td>
-            <td class="shopping-list-unit">Unit 2</td>
-            <td class="shopping-list-item">Item 2</td>
-            <td class="shopping-list-aisle">Aisle 2</td>
-            <td><button type="submit" class="btn btn-info btn-sm">remove</button></td>
-          </tr>
-          <tr>
-            <td class="shopping-list-amount">Amount 3</td>
-            <td class="shopping-list-unit">Unit 3</td>
-            <td class="shopping-list-item">Item 3</td>
-            <td class="shopping-list-aisle">Aisle 3</td>
-            <td><button type="submit" class="btn btn-info btn-sm">remove</button></td>
-          </tr>
-          <tr>
-            <td class="shopping-list-amount">Amount 4</td>
-            <td class="shopping-list-unit">Unit 4</td>
-            <td class="shopping-list-item">Item 4</td>
-            <td class="shopping-list-aisle">Aisle 4</td>
-            <td><button type="submit" class="btn btn-info btn-sm">remove</button></td>
+          <tr ng-repeat="ingredient in mylistCtrl.scheduledIngredients | orderBy: 'Aisle'">
+            <td class="shopping-list-aisle capitalize" ng-bind="ingredient.Aisle">Aisle 1</td>
+            <td class="shopping-list-item capitalize" ng-bind="ingredient.List_Item">Item 1</td>
+            <td class="shopping-list-amount" ng-bind="ingredient.Total_Amount">Amount 1</td>
+            <td class="shopping-list-unit" ng-bind="ingredient.Unit">Unit 1</td>
+            <td><button type="submit" ng-click="mylistCtrl.removeIngredient(mylistCtrl.scheduledIngredients.indexOf(ingredient))" class="btn btn-info btn-sm">remove</button></td>
           </tr>
         </table>
       </div>

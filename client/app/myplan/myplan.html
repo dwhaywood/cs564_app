@@ -42,8 +42,10 @@
                     date="day.date" 
                     on-random="myplanCtrl.randomMeal(day,meal)"
                     on-remove="myplanCtrl.removeMeal(meal)"
-                    on-add="myplanCtrl.addRecipe(day,meal)"
+                    on-add="myplanCtrl.addRecipe(day,meal,recipeid)"
                     recipedata="day.recipedata"
+                    recipeid="day.recipeid"
+                    mealid="day.mealid"
                 ></recipecardmini>
             </td>
           </tr>

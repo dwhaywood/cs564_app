@@ -34,17 +34,26 @@ db.RecipeCuisine = db.sequelize.import('../api/recipe/recipeCuisine.model');
 db.RecipeCuisine.belongsTo(db.Recipe);
 
 db.NutritionAttributes = db.sequelize.import('../api/nutrition-attributes/nutrition-attributes.model');
+db.NutritionAttributes.belongsTo(db.Recipe);
 
 //User specific models
 
 db.Preferences = db.sequelize.import('../api/preferences/preferences.model');
 db.User = db.sequelize.import('../api/user/user.model');
 db.Friends = db.sequelize.import('../api/user/friends.model');
+/*db.User.belongsToMany(db.Friends, {through: db.Friends, foreignKey: 'FriendId'});*/
+db.User.belongsToMany(db.User, { as: 'Friends', through: db.Friends });
+
 
 //Define relationships
 db.ScheduledMeal = db.sequelize.import('../api/scheduled-meal/scheduled-meal.model');
-db.Recipe.belongsToMany(db.User, {through: db.ScheduledMeal});
-db.User.belongsToMany(db.Recipe, {through: db.ScheduledMeal});
+/*Has Many Method*/
+db.ScheduledMeal.belongsTo(db.Recipe);
+db.ScheduledMeal.belongsTo(db.User);
+
+/*Belongs to Many Method
+db.Recipe.belongsToMany(db.User, {through: db.ScheduledMeal, unqiue: false});
+db.User.belongsToMany(db.Recipe, {through: db.ScheduledMeal});*/
 
 db.Recipe.belongsToMany(db.User, {through: db.Preferences});
 db.User.belongsToMany(db.Recipe, {through: db.Preferences});

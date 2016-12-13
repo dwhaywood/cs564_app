@@ -18,6 +18,7 @@
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/myplan')}"><a href="/myplan">My Plan</a></li>
         <li ng-show="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/mylist')}"><a href="/mylist">My List</a></li>   
         <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/console')}"><a href="/console">Console</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

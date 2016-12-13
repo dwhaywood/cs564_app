@@ -36,6 +36,7 @@ import recipecardmini from './components/recipecardmini/recipecardmini.component
 import querier from './querier/querier.service';
 import Recipe from './recipe/Recipe.service';
 import ScheduledMeal from './ScheduledMeal/ScheduledMeal.service';
+import Ingredient from './mylist/Ingredient.service';
 //import search from './search/search.component';
 
 
@@ -72,7 +73,8 @@ angular.module('cs564WebAppApp', [
     querier,
     Recipe,
     ScheduledMeal,
-    userroute
+    userroute,
+    Ingredient
     //ngMessages
 ])
   .config(routeConfig)

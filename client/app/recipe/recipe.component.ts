@@ -4,6 +4,7 @@ const ngRoute = require('angular-route');
 
 
 import routes from './recipe.routes';
+import './recipe.css';
 
 export class RecipeComponent {
     Recipe;
@@ -13,6 +14,9 @@ export class RecipeComponent {
     id;
     $routeParams
     resolve;
+    close;
+    nutrientAttributes;
+    
   /*@ngInject*/
   constructor(Recipe,$http,$routeParams) {
     this.Recipe =Recipe;
@@ -27,7 +31,21 @@ export class RecipeComponent {
           this.Recipe.get({id:this.id,includeIngredients: true, includeNutrients: true}, this.loaddata)
           
       }
+      this.$http.get('/api/nutrition-attributess/',{params:{RecipeId: this.id}}).then((res)=>{
+        var attributes = res.data;
+        this.nutrientAttributes = {};
+        for (var attribute in attributes) {
+            if (attributes.hasOwnProperty(attribute)){
+                this.nutrientAttributes[attributes[attribute].attribute]= attributes[attribute];
+
+            }
+        }
+        console.log(this.nutrientAttributes);
+      });
   }
+    cancel() {
+      this.close({$value: 'cancel'});
+    };
   $routerOnActive= (next) => {
       this.id= next.params.id;
   }
@@ -43,6 +61,6 @@ export default angular.module('cs564WebAppApp.recipe', [ngRoute])
     template: require('./recipe.html'),
     controller: RecipeComponent,
     controllerAs: 'recipeCtrl',
-    bindings: { id: '<', resolve: '<'}
+    bindings: { id: '<', resolve: '<', close: '&'}
   })
   .name;

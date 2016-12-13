@@ -16,6 +16,14 @@ export function UserResource($resource) {
       params: {
         id: 'me'
       }
+    },
+    getinfo: {
+        url: '/api/users/:controller',
+      method: 'GET',
+      params: {
+        id: '@userid',
+        controller: 'info'
+      }
     }
   });
 }

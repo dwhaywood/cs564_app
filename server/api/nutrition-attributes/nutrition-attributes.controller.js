@@ -65,7 +65,12 @@ function handleError(res, statusCode) {
 
 // Gets a list of NutritionAttributess
 export function index(req, res) {
-  return NutritionAttributes.findAll()
+    var whereattributes = {}
+    
+    if (req.query.RecipeId){
+        whereattributes.RecipeId = req.query.RecipeId;
+    }
+  return NutritionAttributes.findAll({where: whereattributes})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

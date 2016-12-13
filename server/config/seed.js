@@ -8,6 +8,7 @@ import sqldb from '../sqldb';
 var Thing = sqldb.Thing;
 var User = sqldb.User;
 
+
 Thing.sync()
   .then(() => {
     return Thing.destroy({ where: {} });
@@ -43,7 +44,7 @@ Thing.sync()
     }]);
   });
 
-User.sync()
+/*User.sync()
   .then(() => User.destroy({ where: {$or :[{name: 'Test User'},{name: 'Admin'}]} }))
   .then(() => {
     User.bulkCreate([{
@@ -61,4 +62,4 @@ User.sync()
     .then(() => {
       console.log('finished populating users');
     });
-  });
+  });*/

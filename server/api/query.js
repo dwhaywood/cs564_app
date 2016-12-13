@@ -10,7 +10,8 @@ import Sequelize from 'sequelize';
 var paramedQuery = function (req, res) {
   var queryString = req.query.sql;
     var replacements= JSON.parse(req.query.replacements);
-    console.log("Running: "+queryString+'\nWith replacements:'+replacements);
+    console.log("Running: "+queryString+'\nWith replacements:'+replacements.toString());
+    console.log(replacements);
    return db.sequelize.query(queryString, { type: Sequelize.QueryTypes.RAW, replacements:replacements})
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

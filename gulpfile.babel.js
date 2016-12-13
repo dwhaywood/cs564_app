@@ -345,7 +345,7 @@ gulp.task('serve', cb => {
     runSequence(
         [
             'clean:tmp',
-            'copydb',
+            //'copydb',
             'lint:scripts',
             'inject',
             'copy:fonts:dev',
@@ -488,6 +488,7 @@ gulp.task('build', cb => {
             'copy:fonts:dist',
             'copy:server',
             'copy:distdb',
+            'copy:queries',
             'webpack:dist'
         ],
         'revReplaceWebpack',
@@ -573,6 +574,13 @@ gulp.task('copy:server', () => {
         'package.json'
     ], {cwdbase: true})
         .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('copy:queries', () => {
+    return gulp.src([
+        './server/api/queries/*'
+    ])
+        .pipe(gulp.dest(`${paths.dist}/server/api/queries`));
 });
 
 /********************
