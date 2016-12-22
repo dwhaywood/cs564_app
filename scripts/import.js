@@ -345,7 +345,34 @@ function importNutritionAttributes() {
     
 }
 
-importNutritionAttributes();
+function importRecipeDiets() {
+    console.log('Sync Recipe Diets');
+    RecipeDiet.sync({force: true}).then(()=> {
+        console.log('Importing recipe diets');
+        importData(RecipeDiet,{
+            dietName: 'DIET',
+            RecipeId: 'RECIPE_ID'
+            },
+           './server/data/dietType.csv');
+    });
+    
+}
+
+function importRecipeCuisine() {
+    console.log('Sync Recipe Cuisines');
+    RecipeCuisine.sync({force: true}).then(()=> {
+        console.log('Importing recipe cusiines');
+        importData(RecipeCuisine,{
+            cuisineName: 'CUISINE_TYPE',
+            RecipeId: 'RECIPE_ID'
+            },
+           './server/data/cuisineRecipe_unique.csv');
+    });
+    
+}
+
+importRecipeCuisine();
+//importNutritionAttributes();
 
 //loadRecipeIngredients();
 
