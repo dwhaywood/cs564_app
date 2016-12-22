@@ -60,7 +60,7 @@
   background: #E53935;
 }
 
-.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-brand>li>a {
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text, .navbar-brand {
      color: white;
 }
 .nav>a {
