@@ -33,7 +33,7 @@
     "babel-runtime": "^6.6.1",
     "babel-polyfill": "^6.7.2",
     "ejs": "^2.3.3",
-    "sequelize": "^3.23.6",
+    "sequelize": "^6.3.5",
     "sqlite3": "~3.1.5",
     "typings": "^0.8.1",
     "express-sequelize-session": "0.4.0",
